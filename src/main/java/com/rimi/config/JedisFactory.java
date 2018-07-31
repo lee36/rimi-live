@@ -1,11 +1,13 @@
 package com.rimi.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.JedisPool;
 
+/**
+ * Jedis连接池配置类
+ */
 @Component
 public class JedisFactory {
     @Autowired

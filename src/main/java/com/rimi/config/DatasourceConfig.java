@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
+/**
+ * durid数据配置类
+ */
 @Configuration
 public class DatasourceConfig {
     @Bean
