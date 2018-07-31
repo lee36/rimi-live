@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.bootcss.com/video.js/6.3.3/video-js.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/video.js/6.3.3/video.min.js"></script>
+    <script src="https://cdn.bootcss.com/videojs-contrib-hls/5.11.0/videojs-contrib-hls.js"></script>
+
+</head>
+<body>
+    <section id="videoPlayer">
+        <video id="example-video" width="600" height="300" class="video-js vjs-default-skin vjs-big-play-centered" poster="">
+          <source
+             src="http://192.168.128.128/hls/test.m3u8"
+             type="application/x-mpegURL" id="target">
+        </video>
+    </section>
+
+
+<script type="text/javascript">
+
+    var player = videojs('example-video', {"poster": "","controls": "true"}, function(){this.on('play',function(){
+            console.log('正在播放');
+          });
+
+         //暂停--播放完毕后也会暂停
+          this.on('pause',function(){
+                       console.log("暂停中")
+                  });
+
+          // 结束
+          this.on('ended', function() {
+            console.log('结束');
+          })
+
+    });
+
+    </script>
+</body>
+</html>
