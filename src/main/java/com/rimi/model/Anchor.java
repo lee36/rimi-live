@@ -11,11 +11,11 @@ import javax.persistence.Table;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "user_tb")
+@Table(name = "anchor_tb")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Anchor {
     @Id
     private String id;
     @Column(unique = true)
@@ -23,7 +23,8 @@ public class User {
     @Column(nullable = false)
     private String nickname;
     private String headimg;
-    private String balance;
+    private String phonenumber;
+    private String liveno;
     private String medal;
     private Integer status;
     private Timestamp ctratetime;

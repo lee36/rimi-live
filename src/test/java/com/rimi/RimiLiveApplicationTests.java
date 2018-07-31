@@ -3,7 +3,7 @@ package com.rimi;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rimi.componet.JedisComponet;
 import com.rimi.componet.SendMailComponet;
-import com.rimi.model.User;
+import com.rimi.model.Manager;
 import com.rimi.repository.UserRepository;
 import org.json.JSONException;
 import org.junit.Test;
@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -37,7 +36,7 @@ public class RimiLiveApplicationTests {
     }
     @Test
     public void testRedis() throws IOException {
-        User user = redisTemplate.get("123", User.class);
+        Manager user = redisTemplate.get("123", Manager.class);
         System.out.print(user);
     }
     @Test
