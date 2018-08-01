@@ -34,6 +34,7 @@ rimi直播项目
 | id | String | 主键，用户的id，非自增 |
 | email | String | 用户的邮箱，用于登录，不能重复 |
 | nickname | String | 昵称，可以重复 |
+| password | String | 普通用户密码 |
 | headimg | File | 账户的头像 |
 | balance | String | 账户的余额 |
 | medal | String | 账户的勋章 |
@@ -46,6 +47,7 @@ rimi直播项目
 |:-------:|:-------------:|:----------:|
 | id | String | 主键，用户的id，非自增 |
 | email | String | 用户的邮箱，用于登录，不能重复 |
+| password | String | 主播密码 |
 | nickname | String | 昵称，可以重复 |
 | headimg | File | 账户的头像 |
 | phonenumber | String | 主播的手机号 |
