@@ -8,7 +8,6 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 @SpringBootApplication
 @EnableAspectJAutoProxy
 public class RimiLiveApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(RimiLiveApplication.class, args);
     }

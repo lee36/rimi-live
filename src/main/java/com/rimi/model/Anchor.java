@@ -3,6 +3,7 @@ package com.rimi.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,14 +19,21 @@ import java.sql.Timestamp;
 public class Anchor {
     @Id
     private String id;
+    @Column(nullable = false,name = "nick_name")
+    private String nickName;
     @Column(unique = true)
     private String email;
-    @Column(nullable = false)
-    private String nickname;
-    private String headimg;
-    private String phonenumber;
-    private String liveno;
+    private String password;
+    @Column(name="head_img")
+    private String headeImg="/head/default.jpg";
+    @Column(unique = true,name="phone_number")
+    private String phoneNumber;
+    @Column(name="live_no")
+    private String liveNo;
     private String medal;
     private Integer status;
-    private Timestamp ctratetime;
+    @Column(name="create_time")
+    private Timestamp createTime;
+    @Column(nullable = false)
+    private int gender;
 }

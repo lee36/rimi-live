@@ -3,7 +3,7 @@ package com.rimi.componet;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IdGennerator {
+public class IdGenneratorComponet {
 
     // ==============================Fields===========================================
     /** 开始时间截 (2015-01-01) */
@@ -52,7 +52,7 @@ public class IdGennerator {
     /**
      * 构造函数
      */
-    public IdGennerator() {
+    public IdGenneratorComponet() {
         if (0 > maxWorkerId || 0 < 0) {
             throw new IllegalArgumentException(String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
         }

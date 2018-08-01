@@ -1,0 +1,16 @@
+@charset "utf-8";
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+}
+#content{
+	width: 60%;
+	margin: 0 auto;
+	margin-top: 80px;
+}
+#content form .form-group{
+	padding-bottom: 20px;
+}
+

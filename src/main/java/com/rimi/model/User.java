@@ -20,11 +20,15 @@ public class User {
     private String id;
     @Column(unique = true)
     private String email;
-    @Column(nullable = false)
-    private String nickname;
-    private String headimg;
+    @Column(nullable = false,name = "nick_name")
+    private String nickName;
+    @Column(name = "head_img")
+    private String headImg;
     private String balance;
     private String medal;
     private Integer status;
-    private Timestamp ctratetime;
+    @Column(name = "create_time")
+    private Timestamp createTime;
+    @Column(nullable = false)
+    private int gender;
 }

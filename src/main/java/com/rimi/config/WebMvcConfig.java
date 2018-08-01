@@ -22,4 +22,5 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
                 .allowedMethods("*")
                 .allowedOrigins("*");
     }
+
 }

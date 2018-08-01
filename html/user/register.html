@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+	    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	    <link rel="stylesheet" href="../css/user.css"/>
+	</head>
+	<body>
+	<!--导航栏-->	
+	<nav class="navbar navbar-default navbar-fixed-top" id="nav">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+				<a class="navbar-brand" href="#">
+					皮皮直播
+				</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="#">直播分类</span></a>
+					</li>
+					<li>
+						<a href="#">你的关注</a>
+					</li>
+				</ul>
+				<form class="navbar-form navbar-left">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="...">
+					</div>
+					<button type="submit" class="btn btn-default">搜索</button>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li >
+						<a href="../anchor/register.html">成为主播</a>
+					</li>
+					<li class="active">
+						<a>普通用户注册</a>
+					</li>
+					<li>
+						<a>开播</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!--主体部分-->
+	<div id="content">
+		<div class="panel panel-default">
+			<div class="panel-heading">用户成长记</div>
+			<div class="panel-body">
+				<!--放头像的位置-->
+				<div class="col-sm-4">
+					<img src="" />
+				</div>
+				<!--表单提交位置-->
+				<div class="col-sm-8">
+					<form action="#" method="post">
+						<!--昵称-->
+						<div class="form-group">
+							<div class="col-sm-2">
+								
+							</div>
+							<div class="col-sm-10">
+							   <label for="nickName">昵称</label>
+							   <input type="text" class="form-control" id="nickName" name="nickName" placeholder="请输入你的昵称">
+							</div>
+						</div>
+						<!--邮箱-->
+						<div class="form-group">
+							<div class="col-sm-2">
+								
+							</div>
+							<div class="col-sm-10">
+								<label for="email">邮箱</label>
+								<input type="email" class="form-control" id="email" name="email" placeholder="请输邮箱">
+							</div>
+						</div>
+						<!--密码-->
+						<div class="form-group">
+							<div class="col-sm-2">
+								
+							</div>
+							<div class="col-sm-10">
+								<label for="password">密码</label>
+								<input type="password" class="form-control" id="password" name="password">
+							</div>
+						</div>
+						<!--头像-->
+						<div class="form-group">
+							<div class="col-sm-2">
+								
+							</div>
+							<div class="col-sm-10">
+								<label for="headeImg">头像</label>
+							    <input type="file" id="headeImg" name="headeImg">
+							</div>
+						</div>
+						<!--性别选择-->
+						<div class="form-group">
+							<div class="col-sm-2">
+								
+							</div>
+							<div class="col-sm-10">
+								<input type="radio" name="gender" value="0">男
+							    <input type="radio" name="gender" value="1"/>女
+							</div>
+						</div>
+						<!--提交重置-->
+						<div class="form-group">
+							<div class="col-sm-2">
+								
+							</div>
+							<div class="col-sm-10">
+								<button type="submit" class="btn btn-primary">提交</button>
+						        <button type="reset" class="btn btn-default">重置</button>
+							</div>
+						</div>
+				    </form>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+		
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	</body>
+<!--</html>-->
