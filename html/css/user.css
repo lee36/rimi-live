@@ -13,4 +13,10 @@
 #content form .form-group{
 	padding-bottom: 20px;
 }
+.form-list{
+    line-height: 50px;
+}
+.input-item{
+    margin-top: 20px;
+}
 
