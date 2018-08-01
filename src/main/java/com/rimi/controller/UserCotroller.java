@@ -4,21 +4,10 @@ import com.rimi.Vo.ResponseResult;
 import com.rimi.componet.BuilderErrorComponet;
 import com.rimi.model.Manager;
 import com.rimi.form.ManagerForm;
-import org.aspectj.lang.annotation.RequiredTypes;
-import org.springframework.boot.web.servlet.error.ErrorController;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 @RestController
 public class UserCotroller {
@@ -31,8 +20,9 @@ public class UserCotroller {
         Manager manager = new Manager(1,"123","123");
         return ResponseResult.error(1001,"用户名错误",manager);
     }
-    @PostMapping("/regist")
+    @PostMapping(name="/regist1",produces="application/json;charset=UTF-8")
     public Object testRegister(@Valid ManagerForm manager, BindingResult result){
+        System.out.println(manager+"========");
         if(result.hasErrors()){
           HashMap map=  BuilderErrorComponet.builderError(result);
             return ResponseResult.error(50010,"失败",map);
@@ -40,4 +30,5 @@ public class UserCotroller {
             return ResponseResult.success(null);
         }
     }
+
 }

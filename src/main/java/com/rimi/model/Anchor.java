@@ -25,7 +25,7 @@ public class Anchor {
     private String email;
     private String password;
     @Column(name="head_img")
-    private String headeImg="/head/default.jpg";
+    private String headImg="/head/default.jpg";
     @Column(unique = true,name="phone_number")
     private String phoneNumber;
     @Column(name="live_no")

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>test</title>
+	</head>
+	<body>
+		管理员注册页面<hr>
+			用户名:<input name="username" type="text" id="username"/><br/>
+			密码:<input name="password" type="password" id="password"/><br>
+			<input type="button" value="注册" id="submit-btn"/>
+			<input type="button" value="重置"/>
+
+		
+		
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+		<script>
+			$(function(){
+				$("#submit-btn").on("click",function(){
+					$.ajax({
+						type:"post",
+						url:"http://localhost:8080/regist",
+						data:{
+							username:$("#username").val(),
+							password:$("#password").val()
+						},
+						contentType:"json",
+						success:function(data){
+							alert(data)
+						}
+					});
+				})
+			})
+		</script>
+	</body>
+</html>
