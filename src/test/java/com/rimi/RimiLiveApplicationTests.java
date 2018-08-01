@@ -3,8 +3,11 @@ package com.rimi;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rimi.componet.JedisComponet;
 import com.rimi.componet.SendMailComponet;
+import com.rimi.model.Anchor;
 import com.rimi.model.Manager;
+import com.rimi.repository.AnchorRepository;
 import com.rimi.repository.UserRepository;
+import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,6 +30,8 @@ public class RimiLiveApplicationTests {
     @Autowired
     private JavaMailSender sender;
     @Autowired
+    private AnchorRepository anchorRepository;
+    @Autowired
     private SendMailComponet sendMailComponet;
     private Logger logger=LoggerFactory.getLogger(RimiLiveApplication.class);
 
@@ -41,6 +46,13 @@ public class RimiLiveApplicationTests {
     }
     @Test
     public void testMail(){
-          sendMailComponet.sendTomail("1213028676@qq.com");
+
+        sendMailComponet.sendTomail("1213028676@qq.com");
     }
+    @Test
+    public void test1(){
+        Anchor email = anchorRepository.findByEmail("2950925007@qq.com");
+        System.out.print(email+"===========");
+    }
+
 }

@@ -13,6 +13,7 @@ import java.util.List;
 public class BuilderErrorComponet {
     public static HashMap builderError(BindingResult result){
         List<FieldError> errors = result.getFieldErrors();
+        System.out.println(errors+"=======");
         HashMap<Object, Object> map = new HashMap<>();
         for (FieldError error : errors) {
             String field = error.getField();
