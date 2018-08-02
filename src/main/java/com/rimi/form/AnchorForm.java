@@ -1,15 +1,18 @@
 package com.rimi.form;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.rimi.constraint.AnchorEmailUnique;
 import com.rimi.constraint.AnchorPhoneUnique;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.io.ObjectInputStream;
 import java.sql.Timestamp;
 
 @Data
@@ -33,9 +36,8 @@ public class AnchorForm {
     private String phoneNumber;
     private String liveNo;
     private String medal="初来乍到";
-    private Integer status;
+    private Integer status=0;
     private Timestamp createTime;
     @NotNull(message = "请选择你的性别")
     private Integer gender;
-
 }

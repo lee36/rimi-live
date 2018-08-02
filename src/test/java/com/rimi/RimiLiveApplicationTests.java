@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -33,6 +34,8 @@ public class RimiLiveApplicationTests {
     private JavaMailSender sender;
     @Autowired
     private AnchorRepository anchorRepository;
+    @Value("${file.save.path}")
+    private String path;
     @Autowired
     private SendMailComponet sendMailComponet;
     private Logger logger=LoggerFactory.getLogger(RimiLiveApplication.class);
@@ -57,7 +60,8 @@ public class RimiLiveApplicationTests {
     //e56ea2d45a3535f7c0ada18b56814db2
     public void testPass(){
         String s  = DigestUtils.md5Hex("123456"+UserConstant.SALT);
-        System.out.println(s);
+        System.out.println(path);
     }
+
 
 }

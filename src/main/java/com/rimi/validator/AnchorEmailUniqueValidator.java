@@ -4,11 +4,15 @@ import com.rimi.constraint.AnchorEmailUnique;
 import com.rimi.model.Anchor;
 import com.rimi.model.User;
 import com.rimi.repository.AnchorRepository;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import javax.validation.*;
+import javax.validation.executable.ExecutableValidator;
 import java.lang.annotation.Annotation;
+
 
 public class AnchorEmailUniqueValidator implements ConstraintValidator<AnchorEmailUnique,String> {
     @Autowired

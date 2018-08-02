@@ -1,5 +1,6 @@
 package com.rimi.controller;
 
+import ch.qos.logback.classic.pattern.SyslogStartConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rimi.componet.*;
 import com.rimi.constant.UserConstant;
@@ -14,10 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.servlet.http.Part;
+import javax.swing.*;
 import javax.validation.Valid;
-import java.io.IOException;
+import javax.validation.constraints.NotNull;
+import java.io.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,17 +46,30 @@ public class AnchorController {
     private IdGenneratorComponet idGennerator;
     @Autowired
     private SendMailComponet sendMailComponet;
+    @Value("${file.save.path}")
+    private String path;
     @Value("${redis.disable.time}")
     private int disableTime;
-    @PostMapping("/regist")
+
+
+    @PostMapping(value="/regist")
     public Object AnchorRegist(@Valid AnchorForm anchorForm,
-                               BindingResult result) throws JsonProcessingException {
+                               BindingResult result, MultipartFile file) throws IOException{
         //验证不通过
        if(result.hasErrors()){
            HashMap hashMap = BuilderErrorComponet.builderError(result);
            return ResponseResult.error(500,"注册失败",hashMap);
-       }
-        //验证通过后
+        }
+        if(file!=null){
+            //生成文件的名字写入磁盘
+            String fileName = UUIDComponet.uuid();
+            File parent = new File(path);
+            if(!parent.exists()){
+                parent.mkdirs();
+            }
+            file.transferTo(new File(parent,fileName+".png"));
+            System.out.println("上传成功");
+        }
         String token=UUIDComponet.uuid();
         //存入redis中
         jedisComponet.set(token,anchorForm,disableTime);
@@ -66,7 +87,6 @@ public class AnchorController {
 
     @GetMapping("/active/{token}")
     public Object AnchorActive(@PathVariable String token) throws IOException {
-
         //有人伪造
         if (token == null) {
             //不存在此token的时候
@@ -84,6 +104,7 @@ public class AnchorController {
             //插入主播的同时生成主播间
             boolean b = anchorService.saveAnchorAndCreateLiveRoom(anchor);
             if(b){
+                //最终成功
                 return ResponseResult.success(null);
             }else{
                 return ResponseResult.error(540,"申请失败",null);
