@@ -15,15 +15,13 @@ import java.util.UUID;
 public class SendMailComponet {
     @Autowired
     private JavaMailSender sender;
-    @Value("${mail.auth.address}")
-    private String tip;
     @Value("${spring.mail.username}")
     private String from;
     public String sendTomail(String to,String token){
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setSubject("关于激活码");
-            message.setText(String.format(tip,token));
+            message.setText("<a href='http://localhost:8080/anchor/active/"+token+"'>点我激活</a>,请尽快激活，10分钟后失效");
             message.setFrom(from);
             message.setTo(to);
             sender.send(message);

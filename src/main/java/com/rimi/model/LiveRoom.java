@@ -3,6 +3,7 @@ package com.rimi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Cleanup;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 @Table(name = "liveroom_tb")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class LiveRoom {
     @Id
     private String id;
