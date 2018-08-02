@@ -1,0 +1,17 @@
+/*弹幕显示面板*/
+.live-msg-panel,.live-video-panel{
+    padding: 0;
+    margin: 0;
+}
+.live-content-row{
+    margin-top: 120px;
+}
+
+/*弹幕按钮和文字*/
+.send-msg-btn{
+    padding: 4px 10px;
+}
+
+#msgText{
+    line-height: 25px;
+}
