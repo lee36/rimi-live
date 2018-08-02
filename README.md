@@ -10,6 +10,9 @@ rimi直播项目
 
 使用以下代码下载nginx的模块，需要编译安装
 > wget https://github.com/arut/nginx-rtmp-module/archive/master.zip
+
+使用ffmpeg
+> http://www.ffmpeg.org/download.html
 <br>
 
 * 使用`druid`作为mysql的数据库连接池
