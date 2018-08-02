@@ -17,6 +17,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class AnchorForm {
     @NotNull(message = "昵称不能为空")
+    @Pattern(regexp = "^[\\u4e00-\\u9fa5]{4,8}$",message = "请输入4-8个中文字符")
     private String nickName;
     @NotNull(message = "邮箱不能为空")
     @Pattern(regexp = "^[0-9A-Za-z][\\.-_0-9A-Za-z]*@[0-9A-Za-z]+(\\.[0-9A-Za-z]+)+$",message = "邮箱格式不正确")

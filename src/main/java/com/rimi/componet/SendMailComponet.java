@@ -15,13 +15,11 @@ import java.util.UUID;
 public class SendMailComponet {
     @Autowired
     private JavaMailSender sender;
-    @Value("${mail.auth.number}")
+    @Value("${mail.auth.address}")
     private String tip;
     @Value("${spring.mail.username}")
     private String from;
-    public String sendTomail(String to){
-        System.out.println(tip);
-        String token = UUID.randomUUID().toString().replace("-","");
+    public String sendTomail(String to,String token){
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setSubject("关于激活码");

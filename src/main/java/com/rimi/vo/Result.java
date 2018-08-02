@@ -1,4 +1,4 @@
-package com.rimi.Vo;
+package com.rimi.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

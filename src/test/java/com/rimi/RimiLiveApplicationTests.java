@@ -3,11 +3,13 @@ package com.rimi;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rimi.componet.JedisComponet;
 import com.rimi.componet.SendMailComponet;
+import com.rimi.constant.UserConstant;
 import com.rimi.model.Anchor;
 import com.rimi.model.Manager;
 import com.rimi.repository.AnchorRepository;
 import com.rimi.repository.UserRepository;
 import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,14 +47,17 @@ public class RimiLiveApplicationTests {
         System.out.print(user);
     }
     @Test
-    public void testMail(){
-
-        sendMailComponet.sendTomail("1213028676@qq.com");
-    }
-    @Test
     public void test1(){
         Anchor email = anchorRepository.findByEmail("2950925007@qq.com");
         System.out.print(email+"===========");
+    }
+    @Test
+    //e56ea2d45a3535f7c0ada18b56814db2
+    //e56ea2d45a3535f7c0ada18b56814db2
+    //e56ea2d45a3535f7c0ada18b56814db2
+    public void testPass(){
+        String s  = DigestUtils.md5Hex("123456"+UserConstant.SALT);
+        System.out.println(s);
     }
 
 }

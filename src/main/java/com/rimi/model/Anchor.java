@@ -36,5 +36,5 @@ public class Anchor {
     @Column(name="create_time")
     private Timestamp createTime;
     @Column(nullable = false)
-    private int gender;
+    private Integer gender;
 }

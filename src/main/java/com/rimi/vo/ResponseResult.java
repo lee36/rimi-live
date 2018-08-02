@@ -1,4 +1,4 @@
-package com.rimi.Vo;
+package com.rimi.vo;
 
 /**
  * 用于前后端数据交互的对象
