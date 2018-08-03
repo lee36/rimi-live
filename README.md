@@ -80,7 +80,7 @@ rimi直播项目
 | 字段名 | 类型 | 备注 |
 |:-------:|:-------------:|:----------:|
 | id | String | ID |
-| email | String | 账户邮箱 |
+| userid | String | 账户ID |
 | auth | String | 权限 |
 <br>
 
