@@ -53,6 +53,7 @@ rimi直播项目
 | password | String | 主播密码 |
 | nickname | String | 昵称，可以重复 |
 | headimg | File | 账户的头像 |
+| balance | String | 账户的余额 
 | phonenumber | String | 主播的手机号 |
 | liveno | String | 直播间号 |
 | medal | String | 账户的勋章 |
