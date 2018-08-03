@@ -63,19 +63,24 @@ public class AnchorController {
         if(file!=null){
             //生成文件的名字写入磁盘
             String fileName = UUIDComponet.uuid();
+            System.out.println(111111);
+            anchorForm.setHeadImg(fileName);
             File parent = new File(path);
             if(!parent.exists()){
                 parent.mkdirs();
             }
-            file.transferTo(new File(parent,fileName+".png"));
-            System.out.println("上传成功");
+            System.out.println(file+"==========");
+            file.transferTo(new File(parent,fileName+".jpg"));
+            System.out.println("上传文件成功!====");
         }
         String token=UUIDComponet.uuid();
         //存入redis中
         jedisComponet.set(token,anchorForm,disableTime);
+        System.out.println("放在redis里面了");
         //发送邮件
         try {
             sendMailComponet.sendTomail(anchorForm.getEmail(), token);
+            System.out.println("邮箱已发送!");
             //发送成功后
             return ResponseResult.success(null);
         }catch (Exception e){
@@ -104,7 +109,6 @@ public class AnchorController {
             //插入主播的同时生成主播间
             boolean b = anchorService.saveAnchorAndCreateLiveRoom(anchor);
             if(b){
-                //最终成功
                 return ResponseResult.success(null);
             }else{
                 return ResponseResult.error(540,"申请失败",null);
