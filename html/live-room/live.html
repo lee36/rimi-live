@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/live.css"/>
 </head>
 <body>
+<span style="display: none" id="tip">000</span>
 <!--导航栏-->
 <nav class="navbar navbar-default navbar-fixed-top" id="nav">
 	<div class="container">
@@ -68,7 +69,7 @@
         <div class="col-sm-3 live-msg-panel">
             <div class="panel panel-default">
               <div class="panel-body live-msg-display-panel">
-                <ul>
+                <ul id="chant-ul">
 
 				</ul>
               </div>
@@ -98,7 +99,7 @@
 		container: '#video',//“#”代表容器的ID，“.”或“”代表容器的class
 		variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
 		flashplayer:false,//如果强制使用flashplayer则设置成true
-		video:'rtmp://192.168.128.128:1935/live/888888'//视频地址
+		video:'rtmp://192.168.241.132:1935/live/123'//视频地址
 	};
 	var player=new ckplayer(videoObject);
 </script>

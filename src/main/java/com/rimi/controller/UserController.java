@@ -100,29 +100,29 @@ public class UserController {
 //        }
     }
 
-    @GetMapping("/useractive/{token}")
-    public Object AnchorActive(@PathVariable String token) throws IOException {
-        //有人伪造
-        if (token == null) {
-            //不存在此token的时候
-            return ResponseResult.error(520, "请先去注册", null);
-        }
-        //否则
-        UserForm userForm = jedisComponet.get(token, UserForm.class);
-        if (userForm == null) {
-            //有人乱输入了链接或者链接失效
-            return ResponseResult.error(530, "这不是一个有效的连接", null);
-        } else {
-            //经过验证后将form表单对象copy到实体中
-            User user = new User();
-            BeanUtils.copyProperties(userForm, user);
-            //插入主播的同时生成主播间
-            boolean b = userService.regist(user);
-            if(b){
-                return ResponseResult.success(null);
-            }else{
-                return ResponseResult.error(540,"申请失败",null);
-            }
-        }
-    }
+//    @GetMapping("/useractive/{token}")
+//    public Object AnchorActive(@PathVariable String token) throws IOException {
+//        //有人伪造
+//        if (token == null) {
+//            //不存在此token的时候
+//            return ResponseResult.error(520, "请先去注册", null);
+//        }
+//        //否则
+//        UserForm userForm = jedisComponet.get(token, UserForm.class);
+//        if (userForm == null) {
+//            //有人乱输入了链接或者链接失效
+//            return ResponseResult.error(530, "这不是一个有效的连接", null);
+//        } else {
+//            //经过验证后将form表单对象copy到实体中
+//            User user = new User();
+//            BeanUtils.copyProperties(userForm, user);
+//            //插入主播的同时生成主播间
+//            boolean b = userService.regist(user);
+//            if(b){
+//                return ResponseResult.success(null);
+//            }else{
+//                return ResponseResult.error(540,"申请失败",null);
+//            }
+//        }
+//    }
 }

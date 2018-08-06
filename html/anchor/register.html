@@ -79,11 +79,12 @@
 						<div class="form-group">
 							<div class="col-sm-8 input-item">
 								<label for="nickName">昵称</label>
-								<input type="text" class="form-control" id="nickName" name="nickName" placeholder="昵称(4-8个汉字)">
+								<input type="text" class="form-control" id="nickName" name="nickName" placeholder="昵称">
 							</div>
 							<!--返回的信息-->
 							<div class="col-sm-4 input-item">
-
+								<label for="nickName" style="visibility: hidden">xxx</label>
+								<span id="nickName_msg" class="form-control info_msg" style="box-shadow: none;border: none"></span>
 							</div>
 						</div>
 						<!--邮箱-->
@@ -93,7 +94,8 @@
 								<input type="email" class="form-control" id="email" name="email" placeholder="邮箱">
 							</div>
 							<div class="col-sm-4 input-item">
-								
+								<label for="nickName" style="visibility: hidden">xxx</label>
+								<span id="email_msg" class="form-control info_msg" style="box-shadow: none;border: none"></span>
 							</div>
 						</div>
 						<!--手机号-->
@@ -103,7 +105,8 @@
 								<input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="手机号">
 							</div>
 							<div class="col-sm-4 input-item">
-								
+								<label for="nickName" style="visibility: hidden">xxx</label>
+								<span id="phoneNumber_msg" class="form-control info_msg" style="box-shadow: none;border: none"></span>
 							</div>
 						</div>
 						<!--密码-->
@@ -113,7 +116,8 @@
 								<input type="password" class="form-control" id="password" name="password" placeholder="密码">
 							</div>
 							<div class="col-sm-4 input-item">
-								
+								<label for="nickName" style="visibility: hidden">xxx</label>
+								<span id="password_msg" class="form-control info_msg" style="box-shadow: none;border: none"></span>
 							</div>
 						</div>
 						<!--确认密码-->
@@ -123,7 +127,8 @@
 								<input type="password" class="form-control" id="rpassword" name="rpassword" placeholder="确认密码">
 							</div>
 							<div class="col-sm-4 input-item">
-
+								<label for="nickName" style="visibility: hidden">xxx</label>
+								<span id="rpassword_msg" class="form-control info_msg" style="box-shadow: none;border: none"></span>
 							</div>
 						</div>
 						<!--性别选择-->
@@ -133,7 +138,7 @@
 								<input type="radio" name="gender" value="1" style="margin-left: 20px"/>女
 							</div>
 							<div class="col-sm-4 input-item">
-								
+
 							</div>
 						</div>
 						<!--提交重置-->
