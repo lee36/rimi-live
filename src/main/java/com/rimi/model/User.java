@@ -24,7 +24,7 @@ public class User {
     private String nickName;
     @Column(name = "head_img")
     private String headImg;
-    private String balance;
+    private String balance = "0";
     private String medal;
     private Integer status;
     @Column(name = "create_time")
