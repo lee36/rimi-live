@@ -14,6 +14,12 @@ public interface AnchorRepository extends JpaRepository<Anchor,String> {
      * 通过手机号找主播
      */
     public Anchor findByPhoneNumber(String phoneNumber);
+<<<<<<< HEAD
+    /**
+     * 通过昵称找到主播
+     */
+=======
 
+>>>>>>> 038dbf7d6d28ce082c3ed0fda2fc776d321a123f
     public Anchor findByNickName(String nickName);
 }

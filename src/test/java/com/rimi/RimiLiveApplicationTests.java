@@ -10,6 +10,8 @@ import com.rimi.repository.AnchorRepository;
 import com.rimi.repository.UserRepository;
 import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.tomcat.util.http.fileupload.FileUpload;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.json.JSONException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +23,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.File;
 import java.io.IOException;
 
 @RunWith(SpringRunner.class)
@@ -34,8 +37,6 @@ public class RimiLiveApplicationTests {
     private JavaMailSender sender;
     @Autowired
     private AnchorRepository anchorRepository;
-    @Value("${file.save.path}")
-    private String path;
     @Autowired
     private SendMailComponet sendMailComponet;
     private Logger logger=LoggerFactory.getLogger(RimiLiveApplication.class);
@@ -54,14 +55,4 @@ public class RimiLiveApplicationTests {
         Anchor email = anchorRepository.findByEmail("2950925007@qq.com");
         System.out.print(email+"===========");
     }
-    @Test
-    //e56ea2d45a3535f7c0ada18b56814db2
-    //e56ea2d45a3535f7c0ada18b56814db2
-    //e56ea2d45a3535f7c0ada18b56814db2
-    public void testPass(){
-        String s  = DigestUtils.md5Hex("123456"+UserConstant.SALT);
-        System.out.println(path);
-    }
-
-
 }

@@ -63,6 +63,7 @@ public class AnchorController {
         if(file!=null){
             //生成文件的名字写入磁盘
             String fileName = UUIDComponet.uuid();
+            System.out.println(111111);
             anchorForm.setHeadImg(fileName);
             File parent = new File(path);
             if(!parent.exists()){

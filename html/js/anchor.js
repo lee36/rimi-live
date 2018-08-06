@@ -1,4 +1,4 @@
-
+﻿
 $(function () {
 	/**
  * 上传图片显示
@@ -24,39 +24,24 @@ $(function () {
      * 提交操作
      */
     $("#btn").on("click",function(e){
-        if (check_all()){
-            var formdata=new FormData();
-            formdata.append("nickName",$("#nickName").val());
-            formdata.append("email",$("#email").val());
-            formdata.append("phoneNumber",$("#phoneNumber").val());
-            formdata.append("password",$("#password").val());
-            formdata.append("gender",$("input[name='gender']").val());
-            formdata.append("file", $('#headImg')[0].files[0]);
-            $.ajax({
-                type:"post",
-                url:"http://localhost:8080/anchor/regist",
-                data:formdata,
-                processData: false,
-                cache: false,
-                contentType: false,
-                success:function(data){
-                    if (data.code===1) {
-                        // 跳转页面
-                        // window.location.href='';
-                        alert("成功")
-                    }
-                    else {
-                        $('#email_msg').text(data.datas.email);
-                        $('#nickName_msg').text(data.datas.nickName);
-                        $('#password_msg').text(data.datas.password);
-                        $('#phoneNumber_msg').text(data.datas.phoneNumber);
-                    }
-                }
-            });
-        }
-    	else {
-            alert("表单填写有误")
-        }
+    	var formdata=new FormData();
+    	formdata.append("nickName",$("#nickName").val());
+    	formdata.append("email",$("#email").val());
+    	formdata.append("phoneNumber",$("#phoneNumber").val());
+    	formdata.append("password",$("#password").val());
+    	formdata.append("gender",$("input[name='gender']").val());
+    	formdata.append("file", $('#headImg')[0].files[0]);
+    	$.ajax({
+    		type:"post",
+    		url:"http://localhost:8080/anchor/regist",
+    		data:formdata,
+    		processData: false,
+    		cache: false,
+    		contentType: false,
+    		success:function(data){
+    			alert(1);
+    		}
+    	});
     });
 
     //表单检测

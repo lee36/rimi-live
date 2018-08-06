@@ -25,7 +25,7 @@ public class Anchor {
     private String email;
     private String password;
     @Column(name="head_img")
-    private String headImg="/head/default.jpg";
+    private String headImg="default.jpg";
     @Column(unique = true,name="phone_number")
     private String phoneNumber;
     @Column(name="live_no")
@@ -38,4 +38,5 @@ public class Anchor {
     private Timestamp createTime;
     @Column(nullable = false)
     private Integer gender;
+    private String balance="0";
 }
