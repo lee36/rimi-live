@@ -78,7 +78,6 @@ public class AnchorServiceImpl implements AnchorService {
 
         }finally {
             outputStream.close();
-            outputStream.close();
         }
         return null;
     }

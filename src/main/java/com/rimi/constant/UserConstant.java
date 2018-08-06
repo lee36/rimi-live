@@ -6,4 +6,5 @@ public class UserConstant {
      */
     public static final String SALT="liwang";
 
+    public static final String PREFIX="user";
 }

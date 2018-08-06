@@ -11,6 +11,9 @@ $(function () {
         $('#headImg').trigger('click');
     }
     function display_file() {
+        // 设定图片的宽高
+
+        // 显示图片
         var reader = new FileReader();
         reader.readAsDataURL(head_img.get(0).files[0]);
         reader.onload = function (ev) {
@@ -63,6 +66,15 @@ $(function () {
     $("#password").on('blur',check_password);
     $("#phoneNumber").on('blur',check_phoneNumber);
     $("#rpassword").on('blur',check_rpassword);
+
+    //重置按钮绑定事件
+    $('button[type="reset"]').on('click',function (e) {
+        $("#nickName").val("");
+        $("#email").val("");
+        $("#password").val("");
+        $("#phoneNumber").val("");
+        $("#rpassword").val("");
+    });
 
     // 定义变量
     var nickName_f = false;
@@ -146,7 +158,7 @@ $(function () {
     
     //检查所有提交的数据
     function check_all() {
-        if(nickName_f&&email_f&&phoneNumber_f&&password_f&rpassword_f){
+        if(nickName_f&&email_f&&phoneNumber_f&&password_f&&rpassword_f){
             return true;
         }
         else {
