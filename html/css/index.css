@@ -5,3 +5,7 @@
 	list-style: none;
 	text-decoration: none;
 }
+.modal-dialog{
+    width: 600px;
+    margin: 120px auto;
+}

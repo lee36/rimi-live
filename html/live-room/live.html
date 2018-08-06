@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LiveRoom</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/live.css"/>
+</head>
+<body>
+<!--导航栏-->
+<nav class="navbar navbar-default navbar-fixed-top" id="nav">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+			<a class="navbar-brand" href="#">
+				皮皮直播
+			</a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="#">直播分类</span></a>
+				</li>
+				<li>
+					<a href="#">你的关注</a>
+				</li>
+			</ul>
+			<form class="navbar-form navbar-left">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="...">
+				</div>
+				<button type="submit" class="btn btn-default">搜索</button>
+			</form>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="">
+					<a href="#">成为主播</a>
+				</li>
+				<li>
+					<a href="../user/register.html">普通用户注册</a>
+				</li>
+				<li>
+					<a>开播</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<!--live 主体-->
+<div class="container">
+    <div class="row live-content-row">
+        <!--视频播放-->
+        <div class="col-sm-9 live-video-panel">
+            <div id="video" class="video-panel" style="width:100%;"></div>
+        </div>
+        <!--弹幕-->
+        <div class="col-sm-3 live-msg-panel">
+            <div class="panel panel-default">
+              <div class="panel-body live-msg-display-panel">
+                <ul>
+
+				</ul>
+              </div>
+				<div class="panel-footer live-msg-input-panel">
+					<div class="row">
+						<div class="col-sm-8">
+							<input type="text" name="msgText" id="msgText" placeholder="输入弹幕">
+						</div>
+						<div class="col-sm-3 col-sm-offset-1">
+							<input type="button" value="发送" class="btn btn-info send-msg-btn" id="sender">
+						</div>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../js/live.js"></script>
+<script src="../js/ckplayer.min.js"></script>
+<script src="../js/sockjs.min.js"></script>
+<script src="../js/stomp.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript">
+	var videoObject = {
+		container: '#video',//“#”代表容器的ID，“.”或“”代表容器的class
+		variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
+		flashplayer:false,//如果强制使用flashplayer则设置成true
+		video:'rtmp://192.168.128.128:1935/live/888888'//视频地址
+	};
+	var player=new ckplayer(videoObject);
+</script>
+
+</body>
+</html>
