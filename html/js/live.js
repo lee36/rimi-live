@@ -20,7 +20,9 @@ $(function () {
     });
     //发送弹幕信息
     $("#sender").on("click",function(){
-        var text=$("#msgText").val();
+        var msg_text = $("#msgText")
+        var text=msg_text.val();
+        msg_text.val("");
         var room=$("#tip").text();
         stompClient.send("/messageReciver",{},JSON.stringify({'msg':text,'nickName':null,'roomId':room}));
     });

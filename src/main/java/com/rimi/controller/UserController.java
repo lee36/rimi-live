@@ -11,15 +11,13 @@ import com.rimi.model.User;
 import com.rimi.service.UserService;
 import com.rimi.service.impl.UserServiceImpl;
 import com.rimi.vo.ResponseResult;
+import lombok.val;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -57,8 +55,9 @@ public class UserController {
     @Value("${redis.disable.time}")
     private int disableTime;
 
-    @RequestMapping(value = "/regist")
+    @PostMapping(value = "/regist",produces = "application/json;application/html")
     public Object userRegist(@Valid UserForm userForm, BindingResult result, MultipartFile file) throws IOException {
+        System.out.println(userForm.getNickName()+"========================");
         //验证不通过
         if(result.hasErrors()){
             HashMap hashMap = BuilderErrorComponet.builderError(result);
@@ -98,6 +97,18 @@ public class UserController {
 //            //发送异常后
 //            return ResponseResult.error(510,"邮件发送异常",null);
 //        }
+    }
+
+    @PostMapping(value = "/login")
+    public Object login(String email,String password){
+        System.out.println(email+password);
+        User user = userService.login(email, password);
+        if (user==null){
+            return ResponseResult.error(503,"fail",null);
+        }
+        else {
+            return ResponseResult.success(user);
+        }
     }
 
 //    @GetMapping("/useractive/{token}")
