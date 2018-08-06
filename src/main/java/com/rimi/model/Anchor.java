@@ -38,5 +38,4 @@ public class Anchor {
     private Timestamp createTime;
     @Column(nullable = false)
     private Integer gender;
-    private String balance="0";
 }

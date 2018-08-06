@@ -1,6 +1,5 @@
 package com.rimi.exception;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

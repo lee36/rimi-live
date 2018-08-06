@@ -7,6 +7,9 @@ $(function () {
     //上传图片展示
     var head_img = $('#headImg');
     var display_img = $('#display_img');
+    // 初始化宽高
+    display_img.css('height',display_img.css('width'));
+
     $('#upload_img').on('click',upload_file);
     $('#headImg').on('change',display_file);
 
@@ -16,7 +19,7 @@ $(function () {
 
     function display_file() {
         // 设定图片的宽高
-
+        display_img.css('height',display_img.css('width'));
         // 显示图片
         var reader = new FileReader();
         reader.readAsDataURL(head_img.get(0).files[0]);
