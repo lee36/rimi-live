@@ -1,5 +1,6 @@
 package com.rimi.service;
 
+import com.rimi.form.UpdateUserForm;
 import com.rimi.model.User;
 
 public interface UserService {
@@ -8,4 +9,6 @@ public interface UserService {
     public Object login(String email,String password);
 
     public User findByEmail(String email);
+
+    boolean updateUser(String id, UpdateUserForm userForm);
 }

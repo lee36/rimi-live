@@ -9,3 +9,6 @@
     width: 600px;
     margin: 120px auto;
 }
+.video-head:hover{
+	cursor: pointer;
+}

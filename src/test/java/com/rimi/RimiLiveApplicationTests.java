@@ -55,4 +55,10 @@ public class RimiLiveApplicationTests {
         Anchor email = anchorRepository.findByEmail("2950925007@qq.com");
         System.out.print(email+"===========");
     }
+
+    @Test
+    public void test5(){
+        Anchor one = anchorRepository.findOneById("anchor47642384030236672");
+        System.out.println(one);
+    }
 }

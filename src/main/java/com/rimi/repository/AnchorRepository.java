@@ -4,6 +4,8 @@ import com.rimi.model.Anchor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface AnchorRepository extends JpaRepository<Anchor,String> {
     /**
@@ -22,4 +24,9 @@ public interface AnchorRepository extends JpaRepository<Anchor,String> {
      * 通过直播间找到主博
      */
     public Anchor findByLiveNo(String liveNo);
+
+    /**
+     * 通过id找主播
+     * */
+    public Anchor findOneById(String id);
 }

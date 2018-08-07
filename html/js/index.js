@@ -92,10 +92,10 @@ $(function () {
             data:post_data,
             success:function (res) {
                 if (res.code===1){
-                    $.cookie('email', res.datas.email);
-                    $.cookie('password',res.datas.password);
-                    $.cookie('nickName',res.datas.nickName);
-                    $.cookie('headImg',res.datas.headImg);
+                    $.cookie('email', res.datas.email,{path:'/'});
+                    $.cookie('password',res.datas.password,{path:'/'});
+                    $.cookie('nickName',res.datas.nickName,{path:'/'});
+                    $.cookie('headImg',res.datas.headImg,{path:'/'});
                     $("#show_name").text(res.datas.nickName);
                     $('#login_display_reset').trigger('click');
                     check_user_display();
@@ -116,15 +116,17 @@ $(function () {
         else {
             $('.login_undisplay_model').css('display','none');
             $('.login_display_model').css('display','block');
+            $("#show_headImg").attr('src',$.cookie('headImg'));
+            $("#show_name").text($.cookie('nickName'));
         }
     }
     
     // 登出
     function logout() {
-        $.cookie('email', null);
-        $.cookie('password',null);
-        $.cookie('nickName',null);
-        $.cookie('headImg',null);
+        $.cookie('email', null,{path:'/'});
+        $.cookie('password',null,{path:'/'});
+        $.cookie('nickName',null,{path:'/'});
+        $.cookie('headImg',null,{path:'/'});
         check_user_display();
     }
 });

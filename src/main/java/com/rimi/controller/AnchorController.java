@@ -4,11 +4,16 @@ import ch.qos.logback.classic.pattern.SyslogStartConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rimi.componet.*;
 import com.rimi.constant.UserConstant;
+import com.rimi.form.UpdateAnchorForm;
+import com.rimi.model.User;
+import com.rimi.repository.AnchorRepository;
+import com.rimi.service.UserService;
 import com.rimi.vo.ResponseResult;
 import com.rimi.constant.AnchorConstant;
 import com.rimi.form.AnchorForm;
 import com.rimi.model.Anchor;
 import com.rimi.service.AnchorService;
+import lombok.val;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +51,9 @@ public class AnchorController {
     private IdGenneratorComponet idGennerator;
     @Autowired
     private SendMailComponet sendMailComponet;
+    @Autowired
+    private AnchorRepository anchorRepository;
+
     @Value("${file.save.path}")
     private String path;
     @Value("${redis.disable.time}")
@@ -87,7 +95,6 @@ public class AnchorController {
             //发送异常后
             return ResponseResult.error(510,"邮件发送异常",null);
         }
-
     }
 
     @GetMapping("/active/{token}")
@@ -116,4 +123,21 @@ public class AnchorController {
         }
     }
 
+    @PostMapping(value = "/updateAnchor")
+    public Object updateAnchor(@Valid UpdateAnchorForm anchorForm, BindingResult result){
+        if(result.hasErrors()){
+           return ResponseResult.error(590,"修改失败",null);
+        }
+        String id = anchorForm.getId();
+        if(id==null){
+            return ResponseResult.error(590,"修改失败",null);
+        }
+        boolean b = anchorService.updateAnchor(anchorForm.getId(), anchorForm);
+        if(b){
+            //修改成功
+            return ResponseResult.success(null);
+        }else{
+            return ResponseResult.error(590,"修改失败",null);
+        }
+    }
 }

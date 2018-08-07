@@ -5,6 +5,8 @@ import com.rimi.componet.*;
 import com.rimi.constant.AnchorConstant;
 import com.rimi.constant.UserConstant;
 import com.rimi.form.AnchorForm;
+import com.rimi.form.UpdateAnchorForm;
+import com.rimi.form.UpdateUserForm;
 import com.rimi.form.UserForm;
 import com.rimi.model.Anchor;
 import com.rimi.model.User;
@@ -141,7 +143,6 @@ public class UserController {
 //    }
     @GetMapping("/get")
     public Object get(String email){
-        System.out.println(email);
         if(email==null){
             return ResponseResult.error(580,"请先登录",null);
         }
@@ -156,6 +157,37 @@ public class UserController {
         }else{
             return ResponseResult.success(user);
         }
+    }
 
+    @GetMapping(value = "/getcode")
+    public Object getCode(String email){
+        Long code = idGenneratorComponet.nextId();
+        if(email==null){
+            return ResponseResult.error(580,"请先登录",null);
+        }
+        Anchor anchor = anchorService.findByEmail(email);
+        if(anchor==null){
+            return ResponseResult.error(580,"请先登录",null);
+        }else{
+            return ResponseResult.success(code);
+        }
+    }
+
+    @PostMapping(value = "/updateUser")
+    public Object updateAnchor(@Valid UpdateUserForm userForm, BindingResult result){
+        if(result.hasErrors()){
+            return ResponseResult.error(590,"修改失败",null);
+        }
+        String id = userForm.getId();
+        if(id==null){
+            return ResponseResult.error(590,"修改失败",null);
+        }
+        boolean b = userService.updateUser(userForm.getId(), userForm);
+        if(b){
+            //修改成功
+            return ResponseResult.success(null);
+        }else{
+            return ResponseResult.error(590,"修改失败",null);
+        }
     }
 }

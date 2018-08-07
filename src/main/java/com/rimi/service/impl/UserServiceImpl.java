@@ -2,6 +2,7 @@ package com.rimi.service.impl;
 
 import com.rimi.componet.IdGenneratorComponet;
 import com.rimi.constant.UserConstant;
+import com.rimi.form.UpdateUserForm;
 import com.rimi.model.Anchor;
 import com.rimi.model.User;
 import com.rimi.repository.AnchorRepository;
@@ -70,5 +71,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public boolean updateUser(String id, UpdateUserForm userForm) {
+        User one = userRepository.findOneById(id);
+        if (one==null){
+            return false;
+        }
+        String formPass = userForm.getPassword();
+        String dbPass = DigestUtils.md5Hex(formPass + UserConstant.SALT);
+        one.setNickName(userForm.getNickName());
+        one.setPassword(dbPass);
+        userRepository.save(one);
+        return true;
     }
 }

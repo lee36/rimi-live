@@ -5,6 +5,8 @@ import com.rimi.componet.UUIDComponet;
 import com.rimi.constant.AnchorConstant;
 import com.rimi.constant.LiveRoomConstant;
 import com.rimi.constant.UserConstant;
+import com.rimi.form.AnchorForm;
+import com.rimi.form.UpdateAnchorForm;
 import com.rimi.model.Anchor;
 import com.rimi.model.LiveRoom;
 import com.rimi.repository.AnchorRepository;
@@ -117,5 +119,20 @@ public class AnchorServiceImpl implements AnchorService {
     @Override
     public Anchor findByEmail(String email) {
         return anchorRepository.findByEmail(email);
+    }
+
+    @Override
+    @Transactional
+    public boolean updateAnchor(String id, UpdateAnchorForm anchorForm) {
+        Anchor one = anchorRepository.findOneById(id);
+        if (one==null){
+            return false;
+        }
+        String formPass = anchorForm.getPassword();
+        String dbPass = DigestUtils.md5Hex(formPass + UserConstant.SALT);
+        one.setNickName(anchorForm.getNickName());
+        one.setPassword(dbPass);
+        anchorRepository.save(one);
+        return true;
     }
 }
