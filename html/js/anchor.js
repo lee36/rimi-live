@@ -48,6 +48,11 @@ $(function () {
                     if (data.code===1){
                         // window.location.href = "";
                         alert("成功");
+                        $("#nickName").val("");
+                        $("#email").val("");
+                        $("#phoneNumber").val("");
+                        $("#password").val("");
+                        $("#rpassword").val("");
                     }
                     else {
                         $("#nickName_msg").text(data.datas.nickName);
