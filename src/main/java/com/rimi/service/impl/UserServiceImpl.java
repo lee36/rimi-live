@@ -2,7 +2,9 @@ package com.rimi.service.impl;
 
 import com.rimi.componet.IdGenneratorComponet;
 import com.rimi.constant.UserConstant;
+import com.rimi.model.Anchor;
 import com.rimi.model.User;
+import com.rimi.repository.AnchorRepository;
 import com.rimi.repository.UserRepository;
 import com.rimi.service.UserService;
 import com.rimi.vo.ResponseResult;
@@ -17,7 +19,8 @@ import javax.transaction.Transactional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private AnchorRepository anchorRepository;
     //获取ID生成器
     @Autowired
     private IdGenneratorComponet idGenneratorComponet;
@@ -37,16 +40,35 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User login(String email, String password) {
+    public Object login(String email, String password) {
         User user = userRepository.findByEmail(email);
-        if (user==null) {
-            return null;
+        if(user==null){
+            Anchor anchor = anchorRepository.findByEmail(email);
+            if(anchor==null){
+                return null;
+            }else{
+                //在主播里找到
+                String md5Pass = DigestUtils.md5Hex(password + UserConstant.SALT);
+                if(md5Pass.equals(anchor.getPassword())){
+                    return anchor;
+                }else{
+                    return null;
+                }
+            }
+        }else{
+            //在用户里找到
+            //在主播里找到
+            String md5Pass = DigestUtils.md5Hex(password + UserConstant.SALT);
+            if(md5Pass.equals(user.getPassword())){
+                return user;
+            }else{
+                return null;
+            }
         }
-        // 获取密码并比较
-        String db = DigestUtils.md5Hex(password + UserConstant.SALT);
-        if(db.equals(user.getPassword())){
-            return user;
-        }
-        return null;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }

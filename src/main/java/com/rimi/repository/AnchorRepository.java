@@ -18,4 +18,8 @@ public interface AnchorRepository extends JpaRepository<Anchor,String> {
      * 通过昵称找到主播
      */
     public Anchor findByNickName(String nickName);
+    /**
+     * 通过直播间找到主博
+     */
+    public Anchor findByLiveNo(String liveNo);
 }

@@ -8,6 +8,7 @@ import com.rimi.form.AnchorForm;
 import com.rimi.form.UserForm;
 import com.rimi.model.Anchor;
 import com.rimi.model.User;
+import com.rimi.service.AnchorService;
 import com.rimi.service.UserService;
 import com.rimi.service.impl.UserServiceImpl;
 import com.rimi.vo.ResponseResult;
@@ -37,7 +38,8 @@ public class UserController {
     // user的service层
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private AnchorService anchorService;
     // 操作redis的工具类
     @Autowired
     private JedisComponet jedisComponet;
@@ -80,6 +82,7 @@ public class UserController {
         BeanUtils.copyProperties(userForm, user);
         user.setId(UserConstant.PREFIX + idGenneratorComponet.nextId() + "");
         user.setCreateTime(new Timestamp(new Date().getTime()));
+        user.setStatus(1);
         userService.regist(user);
         return ResponseResult.success(null);
         // 邮箱激活需要的代码
@@ -102,12 +105,12 @@ public class UserController {
     @PostMapping(value = "/login")
     public Object login(String email,String password){
         System.out.println(email+password);
-        User user = userService.login(email, password);
-        if (user==null){
+        Object object = userService.login(email, password);
+        if (object==null){
             return ResponseResult.error(503,"fail",null);
         }
         else {
-            return ResponseResult.success(user);
+            return ResponseResult.success(object);
         }
     }
 
@@ -136,4 +139,23 @@ public class UserController {
 //            }
 //        }
 //    }
+    @GetMapping("/get")
+    public Object get(String email){
+        System.out.println(email);
+        if(email==null){
+            return ResponseResult.error(580,"请先登录",null);
+        }
+        User user = userService.findByEmail(email);
+        if(user==null){
+            Anchor anchor = anchorService.findByEmail(email);
+            if(anchor==null){
+                return ResponseResult.error(580,"请先登录",null);
+            }else{
+                return ResponseResult.success(anchor);
+            }
+        }else{
+            return ResponseResult.success(user);
+        }
+
+    }
 }
