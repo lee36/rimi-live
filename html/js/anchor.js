@@ -1,7 +1,6 @@
 ﻿
 $(function () {
-
-	/**
+    /**
  * 上传图片显示
  */
     var head_img = $('#headImg');
