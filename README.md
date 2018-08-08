@@ -19,6 +19,7 @@ rimi直播项目
 * 使用`redis`作为缓存的数据库
 * 页面中使用`ajax`和`websocket`
 * 开发软件为`IntelliJ IDEA`
+* 使用`ffmpeg`为视频流分流
 <br>
 
 ## 项目需求
