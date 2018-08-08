@@ -3,6 +3,7 @@ $(function () {
     var socket = new SockJS('http://localhost:8080/rimilive');
     var stompClient = Stomp.over(socket);
     //初始化窗口大小
+    var canvas = $('#canvas');
     var video_panel = $('#video');
     var msg_panel_body = $('.live-msg-display-panel');
     var msg_panel_footer = $('.live-msg-input-panel');
@@ -10,6 +11,15 @@ $(function () {
     video_panel.css('height',video_panel_width/16*9+'px');
     msg_panel_body.css('height',(video_panel_width/16*9-50)+'px');
     msg_panel_footer.css('height','50px');
+    // 初始化弹幕显示的层
+    set_barrage_display();
+    //测试
+    var content = document.getElementById('canvas').getContext('2d');
+    content.fillStyle = 'white';
+    content.fillText('TEST',50,50);
+    content.stroke();
+    content.fill();
+
     //窗口大小变化时改变
     $(window).resize(function() {
         //使直播视频的宽度高度为16:9
@@ -17,10 +27,15 @@ $(function () {
         video_panel.css('height',video_panel_width/16*9+'px');
         msg_panel_body.css('height',(video_panel_width/16*9-50)+'px');
         msg_panel_footer.css('height','50px');
+        set_barrage_display();
+    });
+    // 播放窗口改变时
+    video_panel.resize(function () {
+        set_barrage_display();
     });
     //发送弹幕信息
     $("#sender").on("click",function(){
-        var msg_text = $("#msgText")
+        var msg_text = $("#msgText");
         var text=msg_text.val();
         msg_text.val("");
         var room=$("#tip").text();
@@ -38,4 +53,13 @@ $(function () {
              `)
         });
     });
+
+    function set_barrage_display() {
+        canvas.css({
+            top:video_panel.offset().top+'px',
+            left:video_panel.offset().left+'px',
+            width:video_panel_width+'px',
+            height:(video_panel_width/16*9-50)+'px'
+        });
+    }
 });
