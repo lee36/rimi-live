@@ -5,6 +5,8 @@ import com.rimi.componet.UUIDComponet;
 import com.rimi.constant.AnchorConstant;
 import com.rimi.constant.LiveRoomConstant;
 import com.rimi.constant.UserConstant;
+import com.rimi.form.AnchorForm;
+import com.rimi.form.UpdateAnchorForm;
 import com.rimi.model.Anchor;
 import com.rimi.model.LiveRoom;
 import com.rimi.repository.AnchorRepository;
@@ -13,6 +15,7 @@ import com.rimi.service.AnchorService;
 import com.rimi.vo.ResponseResult;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Part;
@@ -29,6 +32,10 @@ public class AnchorServiceImpl implements AnchorService {
     private LiveRoomRepository liveRoomRepository;
     @Autowired
     private IdGenneratorComponet idGennerator;
+    @Value("${live.room.default.type}")
+    private int liveRoomType;
+    @Value("${live.room.default.info}")
+    private String liveRoomInfo;
     @Override
     public Anchor regist(Anchor anchor) {
         Anchor save = anchorRepository.save(anchor);
@@ -54,6 +61,11 @@ public class AnchorServiceImpl implements AnchorService {
         //生成直播间
         LiveRoom liveRoom = new LiveRoom();
         liveRoom.setId(liveNo);
+        liveRoom.setType(liveRoomType);
+        //关闭状态 没开直播
+        liveRoom.setStatus(0);
+        //设置默认信息
+        liveRoom.setInfo(liveRoomInfo);
         liveRoom.setLivename(anchor.getNickName()+"的直播间");
         liveRoomRepository.save(liveRoom);
         if (regist != null&&liveRoom != null) {
@@ -102,5 +114,25 @@ public class AnchorServiceImpl implements AnchorService {
             isr.close();
         }
         return false;
+    }
+
+    @Override
+    public Anchor findByEmail(String email) {
+        return anchorRepository.findByEmail(email);
+    }
+
+    @Override
+    @Transactional
+    public boolean updateAnchor(String id, UpdateAnchorForm anchorForm) {
+        Anchor one = anchorRepository.findOneById(id);
+        if (one==null){
+            return false;
+        }
+        String formPass = anchorForm.getPassword();
+        String dbPass = DigestUtils.md5Hex(formPass + UserConstant.SALT);
+        one.setNickName(anchorForm.getNickName());
+        one.setPassword(dbPass);
+        anchorRepository.save(one);
+        return true;
     }
 }

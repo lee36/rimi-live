@@ -22,6 +22,7 @@ public class User {
     private String email;
     @Column(nullable = false,name = "nick_name")
     private String nickName;
+    private String password;
     @Column(name = "head_img")
     private String headImg;
     private String balance = "0";

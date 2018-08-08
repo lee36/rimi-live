@@ -1,4 +1,3 @@
-
 $(function () {
     //进入页面后连接socket
     var socket = new SockJS('http://localhost:8080/rimilive');
@@ -21,9 +20,22 @@ $(function () {
     });
     //发送弹幕信息
     $("#sender").on("click",function(){
-        var text=$("#msgText").val();
-        alert(stompClient)
-        stompClient.send("/messageReciver",{},JSON.stringify({'msg':text}));
-        $("")
+        var msg_text = $("#msgText")
+        var text=msg_text.val();
+        msg_text.val("");
+        var room=$("#tip").text();
+        stompClient.send("/messageReciver",{},JSON.stringify({'msg':text,'nickName':null,'roomId':room}));
+    });
+    //订阅者接受消息
+    stompClient.connect({}, function(frame) {
+        // 注册发送消息
+        stompClient.subscribe('/topic/'+$("#tip").text(), function(data) {
+            var str=data.body;
+            $("#chant-ul").append(`
+              <li style="list-style: none;margin-left: -30px">
+                <span>发送人:${str}</span>
+              </li>
+             `)
+        });
     });
 });

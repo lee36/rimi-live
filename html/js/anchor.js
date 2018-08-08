@@ -28,24 +28,45 @@ $(function () {
      * 提交操作
      */
     $("#btn").on("click",function(e){
-    	var formdata=new FormData();
-    	formdata.append("nickName",$("#nickName").val());
-    	formdata.append("email",$("#email").val());
-    	formdata.append("phoneNumber",$("#phoneNumber").val());
-    	formdata.append("password",$("#password").val());
-    	formdata.append("gender",$("input[name='gender']").val());
-    	formdata.append("file", $('#headImg')[0].files[0]);
-    	$.ajax({
-    		type:"post",
-    		url:"http://localhost:8080/anchor/regist",
-    		data:formdata,
-    		processData: false,
-    		cache: false,
-    		contentType: false,
-    		success:function(data){
-    			alert(1);
-    		}
-    	});
+        if (check_all()){
+            var formdata=new FormData();
+            formdata.append("nickName",$("#nickName").val());
+            formdata.append("email",$("#email").val());
+            formdata.append("phoneNumber",$("#phoneNumber").val());
+            formdata.append("password",$("#password").val());
+            formdata.append("gender",$("input[name='gender']").val());
+            formdata.append("file", $('#headImg')[0].files[0]);
+            $.ajax({
+                type:"post",
+                url:"http://localhost:8080/anchor/regist",
+                data:formdata,
+                processData: false,
+                cache: false,
+                contentType: false,
+                success:function(data){
+                    if (data.code===1){
+                        // window.location.href = "";
+                        alert("成功");
+                        $("#nickName").val("");
+                        $("#email").val("");
+                        $("#phoneNumber").val("");
+                        $("#password").val("");
+                        $("#rpassword").val("");
+                    }
+                    else {
+                        $("#nickName_msg").text(data.datas.nickName);
+                        $("#email_msg").text(data.datas.email);
+                        $("#password_msg").text(data.datas.password);
+                        $("#phoneNumber_msg").text(data.datas.phoneNumber);
+                    }
+
+                }
+            });
+        }
+        else {
+            alert("信息填写出错!");
+        }
+
     });
 
     //表单检测
