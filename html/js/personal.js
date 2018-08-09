@@ -93,8 +93,11 @@ $(function () {
     function update_user() {
         var post_data = {};
         post_data.id = $('#hidden_id').val();
-        post_data.nickName = $('#update_nickname').val();
         post_data.password = $('#update_password').val();
+        // 如果昵称没有改变则不上传
+        if ($('#update_nickname').val()!==$.cookie('nickName')) {
+            post_data.nickName = $('#update_nickname').val();
+        }
         if ($('#update_rpassword').val()===post_data.password) {
             if (post_data.id.substring(0,1)==='a'){
                 $.ajax({
@@ -102,8 +105,13 @@ $(function () {
                     url:"http://localhost:8080/anchor/updateAnchor",
                     data:post_data,
                     success:function (data) {
-                        alert("修改成功，请重新登录");
-                        logout();
+                        if (data.code===1){
+                            alert("修改成功，请重新登录");
+                            logout();
+                        }
+                        else {
+                            alert("修改失败");
+                        }
                         // window.location.href = "";
                     },
                     error:function () {
@@ -117,8 +125,13 @@ $(function () {
                     url:"http://localhost:8080/user/updateUser",
                     data:post_data,
                     success:function (data) {
-                        alert("修改成功，请重新登录");
-                        logout();
+                        if (data.code===1){
+                            alert("修改成功，请重新登录");
+                            logout();
+                        }
+                        else {
+                            alert("修改失败");
+                        }
                         // window.location.href = "";
                     },
                     error:function () {

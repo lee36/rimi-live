@@ -74,20 +74,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public boolean updateUser(String id, UpdateUserForm userForm) {
         User one = userRepository.findOneById(id);
         if (one==null){
             return false;
         }
         String formPass = userForm.getPassword();
+        System.out.println("pass"+formPass);
         String dbPass = DigestUtils.md5Hex(formPass + UserConstant.SALT);
-        one.setNickName(userForm.getNickName());
+        String nickName = userForm.getNickName();
+        // 判断是否有昵称传入
+        if (nickName!=null){
+            one.setNickName(nickName);
+        }
         one.setPassword(dbPass);
         userRepository.save(one);
         return true;
     }
 
     @Override
+    @Transactional
     public boolean updateUserImg(String id,String filename) {
         User one = userRepository.findOneById(id);
         if (one==null){

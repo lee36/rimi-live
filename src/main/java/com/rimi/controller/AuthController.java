@@ -1,6 +1,7 @@
 package com.rimi.controller;
 
 import com.rimi.componet.JedisComponet;
+import com.rimi.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class AuthController {
     private JedisComponet jedisComponet;
 
     @PostMapping(value = "/publish")
-    public String pushAuth(String name,HttpServletResponse response){
+    public Object pushAuth(String name,HttpServletResponse response){
         // 判断是否有该权限
         if (jedisComponet.get(name)==null){
             response.setStatus(500);
@@ -24,6 +25,6 @@ public class AuthController {
         else {
             response.setStatus(200);
         }
-        return "ok";
+        return ResponseResult.success(null);
     }
 }

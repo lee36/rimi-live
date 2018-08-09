@@ -130,7 +130,11 @@ public class AnchorServiceImpl implements AnchorService {
         }
         String formPass = anchorForm.getPassword();
         String dbPass = DigestUtils.md5Hex(formPass + UserConstant.SALT);
-        one.setNickName(anchorForm.getNickName());
+        String nickName = anchorForm.getNickName();
+        // 判断是否有昵称传入
+        if (nickName!=null){
+            one.setNickName(nickName);
+        }
         one.setPassword(dbPass);
         anchorRepository.save(one);
         return true;

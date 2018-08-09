@@ -14,7 +14,6 @@ import javax.validation.constraints.Pattern;
 public class UpdateUserForm {
     @NotNull(message = "id不能为空")
     private String id;
-    @NotNull(message = "昵称不能为空")
     @AnchorNickNamelUnique(message = "该昵称已存在")
     @Pattern(regexp = "^[\\u4e00-\\u9fa5]{4,8}$",message = "请输入4-8个中文字符")
     private String nickName;
