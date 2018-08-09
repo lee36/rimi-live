@@ -1,4 +1,6 @@
 $(function () {
+    // 初始化信息
+    var head_img = $('#headImg');
     // 显示导航栏用户信息
     check_user_display();
     // 获取用户信息
@@ -17,6 +19,75 @@ $(function () {
     $('#logout_btn').on('click',logout);
     $('.personal-info-list').on('click','#get_code_btn',get_code);
     $('#save_user_btn').on('click',update_user);
+    head_img.on('change',display_file);
+    $('.upload_img').on('click',upload_file);
+
+    // 触发headImg的点击事件
+    function upload_file() {
+        $('#headImg').trigger('click');
+    }
+
+    // 显示上传图片(html)
+    function display_file() {
+        // 设定图片的宽高
+        display_img.css('height',display_img.css('width'));
+        // 显示图片
+        var id_temp = $('#hidden_id').val();
+        var reader = new FileReader();
+        reader.readAsDataURL(head_img.get(0).files[0]);
+        reader.onload = function (ev) {
+            display_img.attr('src',this.result);
+            //提交图片
+            var formdata=new FormData();
+            formdata.append("id", id_temp);
+            formdata.append("file", $('#headImg')[0].files[0]);
+            if ( id_temp.substring(0,1)==='a'){
+                $.ajax({
+                    type:"post",
+                    url:"http://localhost:8080/anchor/updateAnchorImg",
+                    data:formdata,
+                    processData: false,
+                    cache: false,
+                    contentType: false,
+                    success:function(data){
+                        if (data.code===1){
+                            // window.location.href = "";
+                            alert("修改成功");
+                        }
+                        else {
+                            alert("修改失败")
+                        }
+
+                    }
+                });
+            }
+            else {
+                $.ajax({
+                    type:"post",
+                    url:"http://localhost:8080/user/updateUserImg",
+                    data:formdata,
+                    processData: false,
+                    cache: false,
+                    contentType: false,
+                    success:function(data){
+                        if (data.code===1){
+                            // window.location.href = "";
+                            alert("修改成功");
+                        }
+                        else {
+                            alert("修改失败")
+                        }
+
+                    }
+                });
+            }
+        };
+        // 放置快速多次修改
+        $('#upload_img').off('click').removeClass('upload_img btn-info').addClass('btn-default').text('请稍后');
+        setTimeout(function () {
+            $('#upload_img').on('click',upload_file).removeClass('btn-default').addClass('upload_img btn-info').text('修改头像');
+        },20000);
+    }
 
     // 更新用户信息
     function update_user() {

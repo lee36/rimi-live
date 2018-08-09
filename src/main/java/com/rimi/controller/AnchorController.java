@@ -71,7 +71,6 @@ public class AnchorController {
         if(file!=null){
             //生成文件的名字写入磁盘
             String fileName = UUIDComponet.uuid();
-            System.out.println(111111);
             anchorForm.setHeadImg(fileName);
             File parent = new File(path);
             if(!parent.exists()){
@@ -133,6 +132,29 @@ public class AnchorController {
             return ResponseResult.error(590,"修改失败",null);
         }
         boolean b = anchorService.updateAnchor(anchorForm.getId(), anchorForm);
+        if(b){
+            //修改成功
+            return ResponseResult.success(null);
+        }else{
+            return ResponseResult.error(590,"修改失败",null);
+        }
+    }
+
+    @PostMapping(value = "/updateAnchorImg")
+    public Object updateAnchorImg(String id,MultipartFile file) throws IOException {
+        String fileName = UUIDComponet.uuid();
+        if (file!=null){
+            //生成文件的名字写入磁盘
+            File parent = new File(path);
+            if(!parent.exists()){
+                parent.mkdirs();
+            }
+            System.out.println(file+"==========");
+            file.transferTo(new File(parent,fileName+".jpg"));
+            System.out.println("上传文件成功!====");
+        }
+        // 修改数据库字段
+        boolean b = anchorService.updateAnchorImg(id, fileName);
         if(b){
             //修改成功
             return ResponseResult.success(null);

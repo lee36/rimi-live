@@ -16,4 +16,5 @@ public interface AnchorService {
     public boolean writeFileToPath(byte[] files, File parent, String fileName) throws IOException;
     public Anchor findByEmail(String email);
     public boolean updateAnchor(String id, UpdateAnchorForm anchorForm);
+    public boolean updateAnchorImg(String id,String filename);
 }

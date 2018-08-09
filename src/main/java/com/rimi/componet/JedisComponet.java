@@ -58,6 +58,13 @@ public class JedisComponet {
         T t = StringToBean(s, (Class<T>) clazz);
         return t;
     }
+
+    public String get(String key){
+        Jedis jedis = jedisPool.getResource();
+        String s = jedis.get(key);
+        return s;
+    }
+
     //将对象转换成字符串
     private <T> String beanToString(T value) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

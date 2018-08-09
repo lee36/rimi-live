@@ -86,4 +86,15 @@ public class UserServiceImpl implements UserService {
         userRepository.save(one);
         return true;
     }
+
+    @Override
+    public boolean updateUserImg(String id,String filename) {
+        User one = userRepository.findOneById(id);
+        if (one==null){
+            return false;
+        }
+        one.setHeadImg(filename);
+        userRepository.save(one);
+        return true;
+    }
 }

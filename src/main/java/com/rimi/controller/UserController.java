@@ -1,6 +1,7 @@
 package com.rimi.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rimi.componet.*;
 import com.rimi.constant.AnchorConstant;
 import com.rimi.constant.UserConstant;
@@ -161,7 +162,16 @@ public class UserController {
 
     @GetMapping(value = "/getcode")
     public Object getCode(String email){
+        //生成推流码
         Long code = idGenneratorComponet.nextId();
+        //保存推流码到redis
+        try {
+            jedisComponet.set(code.toString(),email,null);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        // 判断是否为登录状态
         if(email==null){
             return ResponseResult.error(580,"请先登录",null);
         }
@@ -183,6 +193,29 @@ public class UserController {
             return ResponseResult.error(590,"修改失败",null);
         }
         boolean b = userService.updateUser(userForm.getId(), userForm);
+        if(b){
+            //修改成功
+            return ResponseResult.success(null);
+        }else{
+            return ResponseResult.error(590,"修改失败",null);
+        }
+    }
+
+    @PostMapping(value = "/updateUserImg")
+    public Object updateUserImg(String id,MultipartFile file) throws IOException {
+        String fileName = UUIDComponet.uuid();
+        if (file!=null){
+            //生成文件的名字写入磁盘
+            File parent = new File(path);
+            if(!parent.exists()){
+                parent.mkdirs();
+            }
+            System.out.println(file+"==========");
+            file.transferTo(new File(parent,fileName+".jpg"));
+            System.out.println("上传文件成功!====");
+        }
+        // 修改数据库字段
+        boolean b = userService.updateUserImg(id, fileName);
         if(b){
             //修改成功
             return ResponseResult.success(null);

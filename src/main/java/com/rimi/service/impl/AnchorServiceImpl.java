@@ -135,4 +135,16 @@ public class AnchorServiceImpl implements AnchorService {
         anchorRepository.save(one);
         return true;
     }
+
+    @Override
+    @Transactional
+    public boolean updateAnchorImg(String id,String filename) {
+        Anchor one = anchorRepository.findOneById(id);
+        if (one==null){
+            return false;
+        }
+        one.setHeadImg(filename);
+        anchorRepository.save(one);
+        return true;
+    }
 }

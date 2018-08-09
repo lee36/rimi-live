@@ -11,4 +11,6 @@ public interface UserService {
     public User findByEmail(String email);
 
     boolean updateUser(String id, UpdateUserForm userForm);
+
+    boolean updateUserImg(String id,String filename);
 }
