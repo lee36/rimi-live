@@ -15,3 +15,10 @@
 #msgText{
     line-height: 25px;
 }
+
+#clarity-btn{
+    z-index: 9999;
+    position: relative;
+    top: -32px;
+    left: 86%;
+}

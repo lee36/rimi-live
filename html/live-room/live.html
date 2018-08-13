@@ -64,11 +64,15 @@
         <!--视频播放-->
         <div class="col-sm-9 live-video-panel">
             <div id="video" class="video-panel" style="width:100%;"></div>
+			<!--设置的按钮-->
+			<!--<button id="clarity-btn" class="btn btn-default" style="height: 27px;width: 75px;line-height: 12px">-->
+				<!--普通-->
+			<!--</button>-->
         </div>
 		<!--弹幕显示的canvas-->
-        <canvas id="canvas" style="position:absolute;z-index: 1000000;background-color: rebeccapurple;">
-            您的浏览器不支持canvas标签。
-        </canvas>
+        <!--<canvas id="canvas" style="position:absolute;z-index: 1000000;background-color: rebeccapurple;">-->
+            <!--您的浏览器不支持canvas标签。-->
+        <!--</canvas>-->
         <!--弹幕-->
         <div class="col-sm-3 live-msg-panel">
             <div class="panel panel-default">
@@ -93,13 +97,14 @@
 </div>
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/live.js"></script>
-<script src="../js/ckplayer.min.js"></script>
+<script src="../js/ckplayer.js"></script>
 <script src="../js/sockjs.min.js"></script>
 <script src="../js/stomp.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
 		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script type="text/javascript">
 	var videoObject = {
+	    autoplay:true,
 		container: '#video',//“#”代表容器的ID，“.”或“”代表容器的class
 		variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
 		flashplayer:false,//如果强制使用flashplayer则设置成true

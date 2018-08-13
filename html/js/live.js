@@ -2,6 +2,7 @@ $(function () {
     //进入页面后连接socket
     var socket = new SockJS('http://localhost:8080/rimilive');
     var stompClient = Stomp.over(socket);
+
     //初始化窗口大小
     var canvas = $('#canvas');
     var video_panel = $('#video');
@@ -11,14 +12,15 @@ $(function () {
     video_panel.css('height',video_panel_width/16*9+'px');
     msg_panel_body.css('height',(video_panel_width/16*9-50)+'px');
     msg_panel_footer.css('height','50px');
+
     // 初始化弹幕显示的层
-    set_barrage_display();
+    // set_barrage_display();
     //测试
-    var content = document.getElementById('canvas').getContext('2d');
-    content.fillStyle = 'white';
-    content.fillText('TEST',50,50);
-    content.stroke();
-    content.fill();
+    // var content = document.getElementById('canvas').getContext('2d');
+    // content.fillStyle = 'white';
+    // content.fillText('TEST',50,50);
+    // content.stroke();
+    // content.fill();
 
     //窗口大小变化时改变
     $(window).resize(function() {
