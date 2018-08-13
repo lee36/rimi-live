@@ -1,6 +1,8 @@
 package com.rimi.repository;
 
 import com.rimi.model.Anchor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -29,4 +31,6 @@ public interface AnchorRepository extends JpaRepository<Anchor,String> {
      * 通过id找主播
      * */
     public Anchor findOneById(String id);
+
+    public Page<Anchor> findByStatus(int status, Pageable pageable);
 }

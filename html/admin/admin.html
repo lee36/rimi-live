@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/admin.css" />
+</head>
+<body>
+    <!--登录模态框-->
+    <div class="container-fluid" id="login_model" style="display: none">
+        <div class="row">
+            <div id="input_panel" class="col-sm-4 col-sm-offset-4" style="text-align: center">
+                <div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">管理员登录</div>
+                        <div class="panel-body">
+                            <div class="input-group" style="margin-top: 20px">
+                                <span class="input-group-addon" id="basic-addon1">用户名</span>
+                                <input id="admin_username" type="text" class="form-control" placeholder="username" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group" style="margin-top: 20px">
+                                <span class="input-group-addon" id="basic-addon1">密码</span>
+                                <input id="admin_password" type="password" class="form-control" placeholder="password" aria-describedby="basic-addon1">
+                            </div>
+                            <div class="input-group" style="margin-top: 20px">
+                                <button id="login_btn" class="btn btn-info">登录</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--主页面-->
+    <div class="container" id="main_model">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-header">
+                    <h1>系统管理页面&nbsp;&nbsp;<small>当前用户</small><small id="admin_name"></small>&nbsp;&nbsp;<small id="logout_btn">退出</small></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active" id="swich-li-user"><a href="#user" aria-controls="user" role="tab" data-toggle="tab">普通用户</a></li>
+                    <li role="presentation" id="swich-li-anchor"><a href="#anchor" aria-controls="profile" role="tab" data-toggle="tab">主播</a></li>
+                    <li role="presentation" id="swich-li-ban"><a href="#ban_user" aria-controls="profile" role="tab" data-toggle="tab">已封禁</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="user" style="margin-top: 20px">
+                        <table class="table table-striped" id="user-table">
+                            <tr style="text-align: center">
+                                <td>ID</td>
+                                <td>邮箱</td>
+                                <td>昵称</td>
+                                <td>勋章</td>
+                                <td>余额</td>
+                                <td>性别</td>
+                                <td>创建时间</td>
+                                <td>操作</td>
+                            </tr>
+                        </table>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination" id="user-pagination">
+                            </ul>
+                        </nav>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="anchor" style="margin-top: 20px">
+                        <table class="table table-striped" id="anchor-table">
+                            <tr style="text-align: center">
+                                <td>ID</td>
+                                <td>邮箱</td>
+                                <td>昵称</td>
+                                <td>勋章</td>
+                                <td>余额</td>
+                                <td>性别</td>
+                                <td>直播间号</td>
+                                <td>操作</td>
+                            </tr>
+                        </table>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination" id="anchor-pagination">
+                            </ul>
+                        </nav>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="ban_user" style="margin-top: 20px">
+                        <table class="table table-striped" id="ban-table">
+                            <tr style="text-align: center">
+                                <td>ID</td>
+                                <td>邮箱</td>
+                                <td>昵称</td>
+                                <td>操作</td>
+                            </tr>
+                        </table>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination" id="ban-pagination">
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="../js/admin.js"></script>
+</html>

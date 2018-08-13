@@ -17,8 +17,11 @@ import java.net.SocketTimeoutException;
 @RestControllerAdvice
 public class GlobleException {
     @ExceptionHandler(Exception.class)
-    public String timeOutException(){
-        return "服务器异常，请联系管理员";
+    public String timeOutException(Exception e){
+        if(e instanceof AuthDeyException){
+            return "对不起，你没有权限";
+        }
+       return null;
     }
 
 }

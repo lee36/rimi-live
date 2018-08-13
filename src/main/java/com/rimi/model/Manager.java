@@ -18,6 +18,8 @@ import java.io.Serializable;
 public class Manager implements Serializable {
     @Id
     private Integer id;
+    @NotNull(message = "管理员账户不能为空")
     private String username;
+    @NotNull(message = "管理员密码不能为空")
     private String password;
 }

@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+#login_model{
+    width: 100%;
+    background-color: #2b333f;
+}
+#logout_btn:hover{
+    cursor: pointer;
+}
+.table-tr{
+    text-align: center;
+}
+.table-tr td{
+    line-height: 35px !important;
+}
