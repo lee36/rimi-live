@@ -32,7 +32,7 @@ public class Anchor {
     private String liveNo;
     private String medal;
     private String balance = "0";
-    //0代表未激活 1代表在线上 2代表线下 3代表用户冻结
+    //0代表未激活 1代表在线下 2代表线上 3代表用户冻结
     private Integer status;
     @Column(name="create_time")
     private Timestamp createTime;

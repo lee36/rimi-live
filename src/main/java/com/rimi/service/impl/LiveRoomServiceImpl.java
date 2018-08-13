@@ -6,10 +6,12 @@ import com.rimi.repository.AnchorRepository;
 import com.rimi.repository.LiveRoomRepository;
 import com.rimi.service.LiveRoomService;
 import com.rimi.vo.LiveRoomVo;
+import lombok.val;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class LiveRoomServiceImpl implements LiveRoomService {
     }
 
     @Override
+    @Transactional
     public List<LiveRoomVo> findByTypeAndStatus(Integer typeId, Integer status) {
         List<LiveRoom> liveRooms = liveRoomRepository.findByTypeAndStatus(typeId,status);
         List<LiveRoomVo> liveRoomVos=new ArrayList<>();
@@ -45,5 +48,39 @@ public class LiveRoomServiceImpl implements LiveRoomService {
             return liveRoomVos;
         }
         return null;
+    }
+
+    // 开始直播
+    @Override
+    @Transactional
+    public boolean liveStart(String email, String code) {
+        Anchor anchor = anchorRepository.findByEmail(email);
+        if (anchor==null){
+            return false;
+        }
+        String liveno = anchor.getLiveNo();
+        LiveRoom liveRoom = liveRoomRepository.findOneById(liveno);
+        if (liveRoom==null){
+            return false;
+        }
+        // 修改数据
+        liveRoom.setStatus(1);
+        liveRoom.setLivepic(code);
+        liveRoomRepository.save(liveRoom);
+        return true;
+    }
+
+    // 关闭直播间
+    @Override
+    @Transactional
+    public boolean liveClose(String code) {
+        LiveRoom liveRoom = liveRoomRepository.findOneByLivepic(code);
+        if (liveRoom==null){
+            return false;
+        }
+        // 修改数据
+        liveRoom.setStatus(0);
+        liveRoomRepository.save(liveRoom);
+        return true;
     }
 }

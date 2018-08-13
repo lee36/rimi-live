@@ -164,9 +164,9 @@ public class UserController {
     public Object getCode(String email){
         //生成推流码
         Long code = idGenneratorComponet.nextId();
-        //保存推流码到redis
+        //保存推流码到redis(10min时间)
         try {
-            jedisComponet.set(code.toString(),email,null);
+            jedisComponet.set(code.toString(),email,600);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

@@ -11,4 +11,8 @@ import java.util.List;
 public interface LiveRoomRepository extends JpaRepository<LiveRoom,String> {
 
     public List<LiveRoom> findByTypeAndStatus(Integer id, Integer status);
+    // 通过id找直播间
+    public LiveRoom findOneById(String id);
+    // 通过推流码找直播间
+    public LiveRoom findOneByLivepic(String code);
 }

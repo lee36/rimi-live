@@ -8,6 +8,7 @@ import com.rimi.model.Anchor;
 import com.rimi.model.Manager;
 import com.rimi.repository.AnchorRepository;
 import com.rimi.repository.UserRepository;
+import com.rimi.service.LiveRoomService;
 import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.tomcat.util.http.fileupload.FileUpload;
@@ -41,6 +42,9 @@ public class RimiLiveApplicationTests {
     private SendMailComponet sendMailComponet;
     private Logger logger=LoggerFactory.getLogger(RimiLiveApplication.class);
 
+    @Autowired
+    private LiveRoomService liveRoomService;
+
     @Test
     public void getRedis() throws JSONException, JsonProcessingException {
         boolean set = redisTemplate.set("aaa","123",null);
@@ -60,5 +64,15 @@ public class RimiLiveApplicationTests {
     public void test5(){
         Anchor one = anchorRepository.findOneById("anchor47642384030236672");
         System.out.println(one);
+    }
+
+    @Test
+    public void test6(){
+        liveRoomService.liveStart("13638363279@163.com","123");
+    }
+
+    @Test
+    public void test7(){
+        liveRoomService.liveClose("123");
     }
 }

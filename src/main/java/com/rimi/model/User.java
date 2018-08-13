@@ -27,6 +27,7 @@ public class User {
     private String headImg;
     private String balance = "0";
     private String medal;
+    //0代表未激活 1代表在线上 2代表线下 3代表用户冻结
     private Integer status;
     @Column(name = "create_time")
     private Timestamp createTime;
