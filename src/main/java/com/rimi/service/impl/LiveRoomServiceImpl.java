@@ -70,7 +70,7 @@ public class LiveRoomServiceImpl implements LiveRoomService {
         }
         // 修改数据
         liveRoom.setStatus(1);
-        liveRoom.setLivepic(code+".jpg");
+        liveRoom.setLivepic(code);
         liveRoomRepository.save(liveRoom);
         return true;
     }
@@ -79,7 +79,7 @@ public class LiveRoomServiceImpl implements LiveRoomService {
     @Override
     @Transactional
     public boolean liveClose(String code) {
-        LiveRoom liveRoom = liveRoomRepository.findOneByLivepic(code+".jpg");
+        LiveRoom liveRoom = liveRoomRepository.findOneByLivepic(code);
         if (liveRoom==null){
             return false;
         }

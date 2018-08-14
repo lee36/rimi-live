@@ -33,7 +33,9 @@ $(function () {
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="video-head">
-                                        <img src="http://192.168.241.132/tmp/${liverooms[j].livepic}" width="100%" class="content"/>
+                                        <a href="../live-room/live.html?anchorId=${liverooms[j].anchor.id}">
+                                          <img src="http://192.168.241.132/tmp/${liverooms[j].livepic}+'.jpg'" width="100%" class="content"/>
+                                        </a>
                                     </div>
                                     <div class="video-body">
                                         <div class="col-sm-7" style="text-align: left;">${liverooms[j].livename}</div>

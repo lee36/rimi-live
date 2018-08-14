@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AdminService {
     public Manager AdminLogin(Manager manager);
@@ -31,6 +32,7 @@ public interface AdminService {
     public Page<User> findBanUser(int status, Pageable pageable);
 
     public Page<Anchor> findBanAnchor(int status,Pageable pageable);
+
 
 
 }

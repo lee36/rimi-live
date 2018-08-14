@@ -9,9 +9,12 @@ import com.rimi.form.AnchorForm;
 import com.rimi.form.UpdateAnchorForm;
 import com.rimi.model.Anchor;
 import com.rimi.model.LiveRoom;
+import com.rimi.model.UserFocus;
 import com.rimi.repository.AnchorRepository;
 import com.rimi.repository.LiveRoomRepository;
+import com.rimi.repository.UserFocusRepository;
 import com.rimi.service.AnchorService;
+import com.rimi.service.UserFocusService;
 import com.rimi.vo.ResponseResult;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +26,8 @@ import javax.transaction.Transactional;
 import java.io.*;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class AnchorServiceImpl implements AnchorService {
@@ -32,6 +37,8 @@ public class AnchorServiceImpl implements AnchorService {
     private LiveRoomRepository liveRoomRepository;
     @Autowired
     private IdGenneratorComponet idGennerator;
+    @Autowired
+    private UserFocusRepository userFocusRepository;
     @Value("${live.room.default.type}")
     private int liveRoomType;
     @Value("${live.room.default.info}")
@@ -159,5 +166,26 @@ public class AnchorServiceImpl implements AnchorService {
             return null;
         }
         return anchor;
+    }
+
+    @Override
+    @Transactional
+    public Map<Object, Object> getAnchorAndLiveRoom(Anchor anchor,String userId) {
+        HashMap<Object, Object> map =new HashMap<>();
+        try {
+            String liveNo = anchor.getLiveNo();
+            LiveRoom liveRoom = liveRoomRepository.findOneById(liveNo);
+            UserFocus userFocus=userFocusRepository.findByUserId(userId);
+            if(userFocus.getAnchorId().equals(anchor.getId())){
+                map.put("focus",true);
+            }else{
+                map.put("focus",false);
+            }
+            map.put("anchor", anchor);
+            map.put("liveRoom", liveRoom);
+        }catch (Exception e){
+            return null;
+        }
+        return map;
     }
 }

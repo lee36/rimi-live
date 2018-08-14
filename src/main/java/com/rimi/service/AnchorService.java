@@ -8,6 +8,7 @@ import com.rimi.model.User;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 public interface AnchorService {
     public Anchor regist(Anchor anchor);
@@ -18,4 +19,5 @@ public interface AnchorService {
     public boolean updateAnchor(String id, UpdateAnchorForm anchorForm);
     public boolean updateAnchorImg(String id,String filename);
     public Anchor findOneById(String id);
+    public Map<Object,Object> getAnchorAndLiveRoom(Anchor anchor,String userId);
 }

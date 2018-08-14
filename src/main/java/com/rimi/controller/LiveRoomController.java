@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/liveroom")
@@ -65,5 +66,17 @@ public class LiveRoomController {
             return ResponseResult.success(null);
         }
         return ResponseResult.error(580,"更新失败",null);
+    }
+    @GetMapping("/getAnchorAndLiveRoom")
+    public Object getAnchorAndLiveRoom(String anchorId,String userId){
+        Anchor anchor= anchorService.findOneById(anchorId);
+        if(anchor==null){
+            return ResponseResult.error(520,"获取信息失败",null);
+        }
+        Map<Object, Object> map = anchorService.getAnchorAndLiveRoom(anchor,userId);
+        if(map!=null){
+            return ResponseResult.success(map);
+        }
+        return ResponseResult.error(520,"获取信息失败",null);
     }
 }

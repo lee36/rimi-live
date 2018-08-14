@@ -3,6 +3,10 @@ $(function () {
     var socket = new SockJS('http://localhost:8080/rimilive');
     var stompClient = Stomp.over(socket);
 
+    // 绑定事件
+    $('#liveroom_header_focus').on('click',swich_to_unfocus);
+    $('#liveroom_header_nofocus').on('click',swich_to_focus);
+
     //初始化窗口大小
     var canvas = $('#canvas');
     var video_panel = $('#video');
@@ -63,5 +67,18 @@ $(function () {
             width:video_panel_width+'px',
             height:(video_panel_width/16*9-50)+'px'
         });
+    }
+
+    // 关注按钮切换
+    // 取消关注函数
+    function swich_to_unfocus() {
+        $('#liveroom_header_nofocus').css('display','inline');
+        $('#liveroom_header_focus').css('display','none');
+
+    }
+    // 关注主播函数
+    function swich_to_focus() {
+        $('#liveroom_header_nofocus').css('display','none');
+        $('#liveroom_header_focus').css('display','inline');
     }
 });

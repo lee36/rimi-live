@@ -16,8 +16,10 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class UserFocus {
     @Id
+    private Integer id;
     // 用户的id
-    private String id;
-    // 关注的主播id
-    private String focus;
+    @Column(name="user_id")
+    private String userId;
+    @Column(name="anchor_id")
+    private String anchorId;
 }
