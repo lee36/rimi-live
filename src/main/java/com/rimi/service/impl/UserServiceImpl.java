@@ -100,7 +100,7 @@ public class UserServiceImpl implements UserService {
         if (one==null){
             return false;
         }
-        one.setHeadImg(filename);
+        one.setHeadImg(filename+".jpg");
         userRepository.save(one);
         return true;
     }

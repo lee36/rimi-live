@@ -33,7 +33,7 @@ $(function () {
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="video-head">
-                                        <img src="img/1.jpg" width="100%" class="content"/>
+                                        <img src="http://192.168.241.132/tmp/${liverooms[j].livepic}" width="100%" class="content"/>
                                     </div>
                                     <div class="video-body">
                                         <div class="col-sm-7" style="text-align: left;">${liverooms[j].livename}</div>
@@ -116,8 +116,9 @@ $(function () {
         else {
             $('.login_undisplay_model').css('display','none');
             $('.login_display_model').css('display','block');
-            $("#show_headImg").attr('src',$.cookie('headImg'));
+            $("#show_headImg").attr('src',"http://localhost:8080/head/"+$.cookie('headImg'));
             $("#show_name").text($.cookie('nickName'));
+
         }
     }
     

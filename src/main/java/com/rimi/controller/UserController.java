@@ -163,10 +163,10 @@ public class UserController {
     @GetMapping(value = "/getcode")
     public Object getCode(String email){
         //生成推流码
-        Long code = idGenneratorComponet.nextId();
+        String code = UUIDComponet.uuid();
         //保存推流码到redis(10min时间)
         try {
-            jedisComponet.set(code.toString(),email,600);
+            jedisComponet.set(code,email,600);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

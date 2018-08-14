@@ -10,4 +10,5 @@ public interface LiveRoomService {
     public List<LiveRoomVo> findByTypeAndStatus(Integer typeId, Integer status);
     public boolean liveStart(String email,String code);
     public boolean liveClose(String code);
+    public Boolean updateLiveRoom(String id,String roomName,String info,int type);
 }

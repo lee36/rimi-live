@@ -147,8 +147,17 @@ public class AnchorServiceImpl implements AnchorService {
         if (one==null){
             return false;
         }
-        one.setHeadImg(filename);
+        one.setHeadImg(filename+".jpg");
         anchorRepository.save(one);
         return true;
+    }
+
+    @Override
+    public Anchor findOneById(String id) {
+        Anchor anchor = anchorRepository.findOneById(id);
+        if(anchor==null){
+            return null;
+        }
+        return anchor;
     }
 }

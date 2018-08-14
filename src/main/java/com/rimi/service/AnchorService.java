@@ -17,4 +17,5 @@ public interface AnchorService {
     public Anchor findByEmail(String email);
     public boolean updateAnchor(String id, UpdateAnchorForm anchorForm);
     public boolean updateAnchorImg(String id,String filename);
+    public Anchor findOneById(String id);
 }

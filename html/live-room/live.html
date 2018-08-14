@@ -97,7 +97,7 @@
 </div>
 <script src="../js/jquery-3.1.1.min.js"></script>
 <script src="../js/live.js"></script>
-<script src="../js/ckplayer.js"></script>
+<script src="../js/ckplayer.min.js"></script>
 <script src="../js/sockjs.min.js"></script>
 <script src="../js/stomp.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -107,7 +107,7 @@
 	    autoplay:true,
 		container: '#video',//“#”代表容器的ID，“.”或“”代表容器的class
 		variable: 'player',//该属性必需设置，值等于下面的new chplayer()的对象
-		flashplayer:false,//如果强制使用flashplayer则设置成true
+		flashplayer:true,//如果强制使用flashplayer则设置成true
 		video:'rtmp://192.168.241.132:1935/live/123'//视频地址
 	};
 	var player=new ckplayer(videoObject);

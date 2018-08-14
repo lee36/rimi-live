@@ -23,8 +23,10 @@ public class AuthController {
     // 权限验证（判断是否有推流权限）
     @PostMapping(value = "/publish")
     public Object pushAuth(String name,HttpServletResponse response){
+        System.out.println(name);
         // 判断是否有该权限
         String email = jedisComponet.get(name);
+        System.out.println(email);
         if (email==null){
             response.setStatus(500);
         }

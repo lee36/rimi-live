@@ -1,7 +1,9 @@
 package com.rimi.controller;
 
+import com.rimi.model.Anchor;
 import com.rimi.model.LiveRoom;
 import com.rimi.model.Type;
+import com.rimi.service.AnchorService;
 import com.rimi.service.LiveRoomService;
 import com.rimi.service.TypeService;
 import com.rimi.vo.LiveRoomVo;
@@ -9,6 +11,7 @@ import com.rimi.vo.ResponseResult;
 import javafx.scene.control.Alert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +26,8 @@ public class LiveRoomController {
     private TypeService typeService;
     @Autowired
     private LiveRoomService liveRoomService;
+    @Autowired
+    private AnchorService anchorService;
 
     @GetMapping("/all")
     public Object showLiveRoomsByType(){
@@ -45,5 +50,20 @@ public class LiveRoomController {
             maps.add(each);
         }
         return ResponseResult.success(maps);
+    }
+    @PostMapping("/updateRoom")
+    public Object updateRoom(String id,String roomName,String info,int type){
+        System.out.println(11111);
+        Anchor anchor = anchorService.findOneById(id);
+        if(anchor==null){
+            ResponseResult.error(580,"对不起，没有权限",null);
+        }
+        //修改主播的直播间信息
+        Boolean b = liveRoomService.updateLiveRoom(id,roomName,info,type);
+        //通过lIveNo修改
+        if(b){
+            return ResponseResult.success(null);
+        }
+        return ResponseResult.error(580,"更新失败",null);
     }
 }

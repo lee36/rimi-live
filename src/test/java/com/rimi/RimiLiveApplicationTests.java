@@ -6,6 +6,7 @@ import com.rimi.componet.SendMailComponet;
 import com.rimi.constant.UserConstant;
 import com.rimi.model.Anchor;
 import com.rimi.model.Manager;
+import com.rimi.model.User;
 import com.rimi.repository.AnchorRepository;
 import com.rimi.repository.UserRepository;
 import com.rimi.service.LiveRoomService;
@@ -74,5 +75,13 @@ public class RimiLiveApplicationTests {
     @Test
     public void test7(){
         liveRoomService.liveClose("123");
+    }
+    @Test
+    public void test8(){
+        User user=new User();
+        user.setId("1");
+        user.setNickName("哈哈哈哈");
+        user.setPassword("15454512");
+        userRepository.save(user);
     }
 }

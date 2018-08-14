@@ -21,6 +21,10 @@ $(function () {
     $('#save_user_btn').on('click',update_user);
     head_img.on('change',display_file);
     $('.upload_img').on('click',upload_file);
+    $('#save_liveroom_btn').on('click',update_liveroom);
+
+    // 点击获取板块信息
+    $('#update_liveroom_btn').on('click',get_block_list);
 
     // 触发headImg的点击事件
     function upload_file() {
@@ -41,7 +45,7 @@ $(function () {
             var formdata=new FormData();
             formdata.append("id", id_temp);
             formdata.append("file", $('#headImg')[0].files[0]);
-            if ( id_temp.substring(0,1)==='a'){
+            if (id_temp.substring(0,1)==='a'){
                 $.ajax({
                     type:"post",
                     url:"http://localhost:8080/anchor/updateAnchorImg",
@@ -138,7 +142,6 @@ $(function () {
                         alert("数据提交出错")
                     }
                 });
-
             }
         }
        else {
@@ -167,13 +170,15 @@ $(function () {
     // 获取用户信息
     function get_user_info() {
         $.ajax({
-            url:"http://localhost:8080/user/get",
+            url:"http://10.1.0.177:8080/user/get",
             data:{
                 "email":$.cookie("email")
             },
             success:function (data) {
                 //获取到个人信息时
                 if (data.code===1){
+                    $("#display_img").attr('src',"http://localhost:8080/head/"+$.cookie('headImg'));
+                    $("#show_headImg").attr('src',"http://localhost:8080/head/"+$.cookie('headImg'));
                     $('#list_show_email').text(data.datas.email);
                     $('#list_show_nickName').text(data.datas.nickName);
                     $('#list_show_medal').text(data.datas.medal);
@@ -227,7 +232,7 @@ $(function () {
         else {
             $('.login_undisplay_model').css('display','none');
             $('.login_display_model').css('display','block');
-            $("#show_headImg").attr('src',$.cookie('headImg'));
+            $(".login_display_model img").attr("src","http://localhost:8080/head/"+$.cookie('headImg'));
             $("#show_name").text($.cookie('nickName'));
         }
     }
@@ -250,5 +255,53 @@ $(function () {
         var m = "0"+(date.getMonth()+1);
         var d = "0"+date.getDate();
         return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+    }
+
+    // 获取板块信息
+    function get_block_list() {
+        $.ajax({
+            url:'http://localhost:8080/type/all',
+            success:function (data) {
+                if (data.code===1){
+                    // 加载板块信息
+                    $.each(data.datas,function (index,item) {
+                        let html = `<option value="${item.id}">${item.typename}</option>>`;
+                        $('#update_block').append(html);
+                    });
+                }
+                else {
+                    alert("出错啦")
+                }
+            },
+            error:function () {
+                alert("未获取到数据")
+            }
+        })
+    }
+
+    // 更新直播间信息
+    function update_liveroom() {
+        let post_data = {};
+        post_data.id = $('#hidden_id').val();
+        post_data.roomName = $('#update_name').val();
+        post_data.info = $('#update_info').val();
+        post_data.type = $('#update_block').val();
+        $.ajax({
+            type:'post',
+            data:post_data,
+            url:'http://localhost:8080/liveroom/updateRoom',
+            success:function (data) {
+                if (data.code===1){
+                    alert('修改成功');
+                    $('#save_liveroom_reset').trigger('click');
+                }
+                else {
+                    alert('出错了');
+                }
+            },
+            error:function () {
+                alert('无法连接');
+            }
+        })
     }
 });

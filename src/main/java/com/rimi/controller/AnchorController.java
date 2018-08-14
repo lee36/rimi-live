@@ -66,6 +66,7 @@ public class AnchorController {
         //验证不通过
        if(result.hasErrors()){
            HashMap hashMap = BuilderErrorComponet.builderError(result);
+           System.out.println(hashMap);
            return ResponseResult.error(500,"注册失败",hashMap);
         }
         if(file!=null){
@@ -142,6 +143,7 @@ public class AnchorController {
 
     @PostMapping(value = "/updateAnchorImg")
     public Object updateAnchorImg(String id,MultipartFile file) throws IOException {
+        System.out.println("进来le!!!!!!!!!!!!!!!!!!");
         String fileName = UUIDComponet.uuid();
         if (file!=null){
             //生成文件的名字写入磁盘
