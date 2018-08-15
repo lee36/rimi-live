@@ -17,9 +17,11 @@ import com.rimi.service.AnchorService;
 import com.rimi.service.UserFocusService;
 import com.rimi.vo.ResponseResult;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.Part;
 import javax.transaction.Transactional;
@@ -27,6 +29,7 @@ import java.io.*;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -170,16 +173,28 @@ public class AnchorServiceImpl implements AnchorService {
 
     @Override
     @Transactional
-    public Map<Object, Object> getAnchorAndLiveRoom(Anchor anchor,String userId) {
+    public Map<Object, Object> getAnchorAndLiveRoom(Anchor anchor,String email) {
         HashMap<Object, Object> map =new HashMap<>();
         try {
             String liveNo = anchor.getLiveNo();
             LiveRoom liveRoom = liveRoomRepository.findOneById(liveNo);
-            UserFocus userFocus=userFocusRepository.findByUserId(userId);
-            if(userFocus.getAnchorId().equals(anchor.getId())){
-                map.put("focus",true);
-            }else{
+            List<UserFocus> userFocus=userFocusRepository.findByUserId(email);
+            System.out.println(userFocus.size()+"=================");
+            if(userFocus.size()<=0){
                 map.put("focus",false);
+            }else{
+                for (UserFocus focus : userFocus) {
+                    String anchorId = focus.getAnchorId();
+                    String inputId=anchor.getId();
+                    if(inputId.equals(anchorId)){
+                        map.put("focus",true);
+                        break;
+                    }else{
+                        System.out.println(1111111);
+                        map.put("focus",false);
+                    }
+                }
+
             }
             map.put("anchor", anchor);
             map.put("liveRoom", liveRoom);

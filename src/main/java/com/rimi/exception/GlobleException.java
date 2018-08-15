@@ -20,6 +20,8 @@ public class GlobleException {
     public String timeOutException(Exception e){
         if(e instanceof AuthDeyException){
             return "对不起，你没有权限";
+        }else if(e instanceof SendMessageException){
+            return "请先登录";
         }
        return null;
     }

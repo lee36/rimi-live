@@ -22,3 +22,8 @@
     top: -32px;
     left: 86%;
 }
+#header_anchor_name{
+    line-height: 50px;
+    color: #d43f3a;
+    font-size: 1.6rem;
+}

@@ -208,6 +208,10 @@ $(function () {
                                         </div>
                                     </li>`;
                         $(".personal-info-list").append(html);
+                        $('#anchor_personal_panel').append(
+                            ` <!--修改直播间信息按钮-->
+                <button class="btn btn-info" id="update_liveroom_btn" data-toggle="modal" data-target="#liveModal">修改直播间信息</button>`
+                        )
                     }
                     else {
                         // 生成主体数据
@@ -245,7 +249,7 @@ $(function () {
         $.cookie('headImg',null,{path:'/'});
         check_user_display();
         // 跳转页面
-
+        window.location.href = '../index.html';
     }
 
     // 时间戳转日期

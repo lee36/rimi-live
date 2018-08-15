@@ -8,6 +8,7 @@ import com.rimi.model.Anchor;
 import com.rimi.model.Manager;
 import com.rimi.model.User;
 import com.rimi.repository.AnchorRepository;
+import com.rimi.repository.UserFocusRepository;
 import com.rimi.repository.UserRepository;
 import com.rimi.service.LiveRoomService;
 import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
@@ -25,6 +26,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 
@@ -39,6 +41,8 @@ public class RimiLiveApplicationTests {
     private JavaMailSender sender;
     @Autowired
     private AnchorRepository anchorRepository;
+    @Autowired
+    private UserFocusRepository userFocusRepository;
     @Autowired
     private SendMailComponet sendMailComponet;
     private Logger logger=LoggerFactory.getLogger(RimiLiveApplication.class);
@@ -83,5 +87,9 @@ public class RimiLiveApplicationTests {
         user.setNickName("哈哈哈哈");
         user.setPassword("15454512");
         userRepository.save(user);
+    }
+    @Test
+    public void test9(){
+        userFocusRepository.deleteByUserIdAndAnchorId("13638363279@163.com","anchor478950779898560512");
     }
 }

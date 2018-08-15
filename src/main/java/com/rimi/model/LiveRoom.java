@@ -24,7 +24,7 @@ public class LiveRoom {
     private Integer type;
     private String keyword;
     private String info;
-    private Long hotnum;
+    private Long hotnum=0L;
     // 直播间的状态，0为未开播，1为开播
     private Integer status;
     // 图像的名字(推流码命名)

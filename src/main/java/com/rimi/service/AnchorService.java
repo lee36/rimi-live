@@ -19,5 +19,5 @@ public interface AnchorService {
     public boolean updateAnchor(String id, UpdateAnchorForm anchorForm);
     public boolean updateAnchorImg(String id,String filename);
     public Anchor findOneById(String id);
-    public Map<Object,Object> getAnchorAndLiveRoom(Anchor anchor,String userId);
+    public Map<Object,Object> getAnchorAndLiveRoom(Anchor anchor,String email);
 }

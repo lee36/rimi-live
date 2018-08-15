@@ -3,10 +3,14 @@ package com.rimi.service.impl;
 import com.rimi.model.Anchor;
 import com.rimi.model.LiveRoom;
 import com.rimi.model.Type;
+import com.rimi.model.UserFocus;
 import com.rimi.repository.AnchorRepository;
 import com.rimi.repository.LiveRoomRepository;
 import com.rimi.repository.TypeRepository;
+import com.rimi.repository.UserFocusRepository;
 import com.rimi.service.LiveRoomService;
+import com.rimi.service.UserFocusService;
+import com.rimi.vo.AnchorLiveRoomVo;
 import com.rimi.vo.LiveRoomVo;
 import lombok.val;
 import org.springframework.beans.BeanUtils;
@@ -17,6 +21,7 @@ import org.springframework.util.StringUtils;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class LiveRoomServiceImpl implements LiveRoomService {
@@ -26,6 +31,8 @@ public class LiveRoomServiceImpl implements LiveRoomService {
     private AnchorRepository anchorRepository;
     @Autowired
     private TypeRepository typeRepository;
+    @Autowired
+    private UserFocusRepository userFocusRepository;
     @Override
     public LiveRoom createLiveRoom(LiveRoom liveRoom) {
         LiveRoom save = liveRoomRepository.save(liveRoom);
@@ -108,5 +115,78 @@ public class LiveRoomServiceImpl implements LiveRoomService {
         }
         return false;
 
+    }
+
+    @Override
+    @Transactional
+    public Boolean opConcernAndOpFocus(String anchorId, String email, int flag) {
+        if(flag==1){
+            //增加操作
+            //先添加到数据库中
+            UserFocus userFocus = new UserFocus();
+            userFocus.setUserId(email);
+            userFocus.setAnchorId(anchorId);
+            UserFocus save = userFocusRepository.save(userFocus);
+            if(save!=null){
+                //增加关注度
+                Anchor anchor = anchorRepository.findOneById(anchorId);
+                if(anchor!=null){
+                    String liveNo = anchor.getLiveNo();
+                    LiveRoom liveRoom = liveRoomRepository.findOneById(liveNo);
+                    Long hotnum = liveRoom.getHotnum();
+                    liveRoom.setHotnum(hotnum+1L);
+                    liveRoomRepository.save(liveRoom);
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }else {
+            //删除操作
+            //从数据库中删除
+            Integer count = userFocusRepository.deleteByUserIdAndAnchorId(email, anchorId);
+            if(count!=null){
+                //减少关注度
+                Anchor anchor = anchorRepository.findOneById(anchorId);
+                if(anchor!=null){
+                    String liveNo = anchor.getLiveNo();
+                    LiveRoom liveRoom = liveRoomRepository.findOneById(liveNo);
+                    Long hotnum = liveRoom.getHotnum();
+                    liveRoom.setHotnum(hotnum-1L);
+                    liveRoomRepository.save(liveRoom);
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<AnchorLiveRoomVo> findFocusLiveRoom(String email) {
+        List<AnchorLiveRoomVo> list=new ArrayList<>();
+        //通过关注表查到主播的id
+        List<UserFocus> AnchorList = userFocusRepository.findByUserId(email);
+        //循环获取主播id
+        for (UserFocus anchor : AnchorList) {
+            String anchorId = anchor.getAnchorId();
+            //通过id查找主播
+            Anchor exit = anchorRepository.findOneById(anchorId);
+            //找出直播间id
+            String liveNo = exit.getLiveNo();
+            //找出直播间
+            LiveRoom liveRoom = liveRoomRepository.findOneById(liveNo);
+            AnchorLiveRoomVo anchorLiveRoom = new AnchorLiveRoomVo();
+            anchorLiveRoom.setAnchor(exit);
+            anchorLiveRoom.setLiveRoom(liveRoom);
+            list.add(anchorLiveRoom);
+        }
+        return list;
     }
 }
