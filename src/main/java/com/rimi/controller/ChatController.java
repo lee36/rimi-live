@@ -6,6 +6,8 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 用户实现聊天的控制层
  */
@@ -15,7 +17,6 @@ public class ChatController {
     private SimpMessagingTemplate simpMessagingTemplate;
     @MessageMapping("/messageReciver")
     public void messageReciver(InMessage inMessage){
-       System.out.println(inMessage+"=========");
-       simpMessagingTemplate.convertAndSend("/topic/"+inMessage.getRoomId(),inMessage.getMsg());
+       simpMessagingTemplate.convertAndSend("/topic/"+inMessage.getRoomId(),inMessage);
     }
 }

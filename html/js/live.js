@@ -104,13 +104,13 @@ $(function () {
     });
     //订阅者接受消息
     stompClient.connect({}, function(frame) {
-        var nickName=$.cookie("nickName");
         // 注册发送消息
         stompClient.subscribe('/topic/'+$("#tip").text(), function(data) {
             var str=data.body;
+            var obj=JSON.parse(str);
             $("#chant-ul").append(`
               <li style="list-style: none;margin-left: -30px">
-                <span>${nickName}:${str}</span>
+                <span>${obj.nickName}:${obj.msg}</span>
               </li>
              `)
         });

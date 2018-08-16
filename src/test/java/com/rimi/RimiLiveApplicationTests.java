@@ -3,7 +3,9 @@ package com.rimi;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rimi.componet.JedisComponet;
 import com.rimi.componet.SendMailComponet;
+import com.rimi.constant.AdminConstant;
 import com.rimi.constant.UserConstant;
+import com.rimi.controller.AdminController;
 import com.rimi.model.Anchor;
 import com.rimi.model.Manager;
 import com.rimi.model.User;
@@ -91,5 +93,9 @@ public class RimiLiveApplicationTests {
     @Test
     public void test9(){
         userFocusRepository.deleteByUserIdAndAnchorId("13638363279@163.com","anchor478950779898560512");
+    }
+    @Test
+    public void test10(){
+       System.out.println(DigestUtils.md5Hex("123456"+AdminConstant.SALT));
     }
 }

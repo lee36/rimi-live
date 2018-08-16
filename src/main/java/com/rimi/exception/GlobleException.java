@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.persistence.ExcludeDefaultListeners;
+import javax.servlet.http.HttpServletRequest;
 import java.io.ObjectInputStream;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -17,11 +18,11 @@ import java.net.SocketTimeoutException;
 @RestControllerAdvice
 public class GlobleException {
     @ExceptionHandler(Exception.class)
-    public String timeOutException(Exception e){
+    public String timeOutException(Exception e, HttpServletRequest request){
         if(e instanceof AuthDeyException){
-            return "对不起，你没有权限";
+            return e.getMessage();
         }else if(e instanceof SendMessageException){
-            return "请先登录";
+            return e.getMessage();
         }
        return null;
     }
