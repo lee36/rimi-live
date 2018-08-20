@@ -109,10 +109,11 @@ $(function () {
             var str=data.body;
             var obj=JSON.parse(str);
             $("#chant-ul").append(`
-              <li style="list-style: none;margin-left: -30px">
+              <li class="chat_li" style="list-style: none;margin-left: -30px">
                 <span>${obj.nickName}:${obj.msg}</span>
               </li>
-             `)
+             `);
+            scorll_to_bottom();
         });
     });
 
@@ -195,5 +196,10 @@ $(function () {
         //check_user_display();
         // 跳转页面
         window.location.href = '../index.html';
+    }
+    
+    // 控制msg_panel滚动条
+    function scorll_to_bottom() {
+        $('.live-msg-display-panel').scrollTop($('.live-msg-display-panel')[0].scrollHeight);
     }
 });

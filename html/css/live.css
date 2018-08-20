@@ -27,3 +27,13 @@
     color: #d43f3a;
     font-size: 1.6rem;
 }
+.chat_li{
+    word-wrap:break-word;
+    word-break:break-all;
+    width: 100%;
+    display: inline-block;
+}
+.live-msg-display-panel{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
