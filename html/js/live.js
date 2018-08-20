@@ -115,8 +115,9 @@ $(function () {
               </li>
              `);
                 scorll_to_bottom();
+            }else{
+                alert("请先登录，或者联系管理员");
             }
-
         });
     });
 
