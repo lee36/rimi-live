@@ -30,8 +30,7 @@ public class SendMessageAspect {
         Object[] args = joinPoint.getArgs();
         InMessage in=(InMessage)args[0];
         String nickName = in.getNickName();
-        System.out.println(nickName+"======");
-        if(StringUtils.isEmpty(nickName)){
+        if("null".equals(nickName)){
             throw new SendMessageException("你没有权限");
         }
         User user = userRepository.findByNickName(nickName);
@@ -40,14 +39,13 @@ public class SendMessageAspect {
                 throw new SendMessageException("请联系管理员");
             }
             return ;
-
         }else{
             Anchor anchor = anchorRepository.findByNickName(nickName);
             if(anchor!=null){
                 if(anchor.getStatus()==3){
                     throw new SendMessageException("请联系管理员");
                 }
-               return ;
+                return ;
             }
         }
 

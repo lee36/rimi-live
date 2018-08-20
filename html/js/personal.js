@@ -24,7 +24,7 @@ $(function () {
     $('#save_liveroom_btn').on('click',update_liveroom);
 
     // 点击获取板块信息
-    $('#update_liveroom_btn').on('click',get_block_list);
+    $('#anchor_personal_panel').on('click','#update_liveroom_btn',get_block_list);
 
     // 触发headImg的点击事件
     function upload_file() {
@@ -55,8 +55,9 @@ $(function () {
                     contentType: false,
                     success:function(data){
                         if (data.code===1){
-                            // window.location.href = "";
-                            alert("修改成功");
+                            alert("修改成功,请重新登录");
+                            logout();
+                            window.location.href = "../index.html";
                         }
                         else {
                             alert("修改失败")
@@ -75,8 +76,9 @@ $(function () {
                     contentType: false,
                     success:function(data){
                         if (data.code===1){
-                            // window.location.href = "";
                             alert("修改成功");
+                            logout();
+                            window.location.href = "../index.html";
                         }
                         else {
                             alert("修改失败")
@@ -170,7 +172,7 @@ $(function () {
     // 获取用户信息
     function get_user_info() {
         $.ajax({
-            url:"http://10.1.0.177:8080/user/get",
+            url:"http://localhost:8080/user/get",
             data:{
                 "email":$.cookie("email")
             },

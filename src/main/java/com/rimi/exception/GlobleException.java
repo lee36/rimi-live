@@ -18,10 +18,12 @@ import java.net.SocketTimeoutException;
 @RestControllerAdvice
 public class GlobleException {
     @ExceptionHandler(Exception.class)
-    public String timeOutException(Exception e, HttpServletRequest request){
+    public String timeOutException(Exception e){
+        System.out.println("1111111111111111");
         if(e instanceof AuthDeyException){
             return e.getMessage();
         }else if(e instanceof SendMessageException){
+            System.out.println(11111);
             return e.getMessage();
         }
        return null;

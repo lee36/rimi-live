@@ -108,12 +108,15 @@ $(function () {
         stompClient.subscribe('/topic/'+$("#tip").text(), function(data) {
             var str=data.body;
             var obj=JSON.parse(str);
-            $("#chant-ul").append(`
+            if(obj.nickName!=="null"){
+                $("#chat-ul").append(`
               <li class="chat_li" style="list-style: none;margin-left: -30px">
                 <span>${obj.nickName}:${obj.msg}</span>
               </li>
              `);
-            scorll_to_bottom();
+                scorll_to_bottom();
+            }
+
         });
     });
 
@@ -136,7 +139,7 @@ $(function () {
         post_data.anchorId = getQueryString('anchorId');
         post_data.flag = 0;
         $.ajax({
-            url:'http://10.1.0.177:8080/liveroom/focus',
+            url:'http://localhost:8080/liveroom/focus',
             data:post_data,
             success:function (data) {
                 if (data.code===1){
@@ -155,7 +158,7 @@ $(function () {
         post_data.anchorId = getQueryString('anchorId');
         post_data.flag = 1;
         $.ajax({
-            url:'http://10.1.0.177:8080/liveroom/focus',
+            url:'http://localhost:8080/liveroom/focus',
             data:post_data,
             success:function () {
                 alert("关注成功！");

@@ -3,7 +3,7 @@ $(function () {
     let post_data = {};
     post_data.email = $.cookie('email');
     $.ajax({
-        url: "http://10.1.0.177:8080/liveroom/userFocus",
+        url: "http://localhost:8080/liveroom/userFocus",
         data: post_data,
         success: function (data) {
             if (data.code === 1) {
